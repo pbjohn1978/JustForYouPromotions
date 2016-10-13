@@ -6,8 +6,9 @@ using System.Web.Mvc;
 
 namespace JustForYouPromotions.Controllers
 {
-    public class HomeController : Controller
+    public class ContactController : Controller
     {
+        // GET: Contact
         public ActionResult Index()
         {
             return View();

@@ -1,24 +1,53 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top:0px;
+    padding-bottom:0px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.header {
+    width:100%;
+    height:150px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    background-image:url(../Images/HeaderBackgroundImg.gif);
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.SideBarWidth {
+    width:20%;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.SideBarBackground {
+    background-image:url(../Images/SideBarBackgroundImg.gif);
+}
+
+.SideBarTextColor {
+    color:white;
+}
+
+.HeaderLogo {
+    position:absolute;
+    top:20px;
+    left:10px;
+    height:100px;
+    width:225px;
+}
+
+ul li {
+    text-decoration:none;
+    list-style:none;
+    float:right;
+}
+#contTab {
+    padding:0px 400px 0px 0px;    
+}
+#homeTab {
+    padding:0px 70px 0px 0px;    
+}
+#prodTab {
+    padding:0px 70px 0px 0px;    
+}
+
+.LogoContainer {
+    width:250px;
+    height:150px;
 }
