@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@model JustForYouPromotions.Models.LoginModel
+
+<!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -27,12 +29,25 @@
         <div class="mainBody">
             <div class="sideBar">
                 <div>
-                    <h3>Left Side Bar here</h3>
+                    <h3>Sign In:</h3>
+                    <br />
+                    <h5>UserName:</h5>
+                    @Html.TextBoxFor(model => model.UserName)
+                    <h5>Password:</h5>
+                    @Html.PasswordFor(model => model.Password)
+                    <br />
+
+                    <br />
+                    <span>@Html.ActionLink("Click Me", "Index", "Register")</span><span>  to register for email updates about new products!</span>
+                    <br /><br /><br />
+                    <h3>Announcements:</h3>
+                    <br />
+                    <p>Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here...</p>
                 </div>
             </div>
 
             <div class="content">
-                <div>@RenderBody()</div>
+                @RenderBody()
             </div>
         </div>
         <div class="footer">

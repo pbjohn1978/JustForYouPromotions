@@ -40,7 +40,7 @@ h6 {
 
 .wrap{
 	max-width:2000px;
-	min-width:550px;
+	min-width:700px;
 }
 
 .banner{
@@ -83,14 +83,14 @@ h6 {
 }
 
 .daTabsBorder2 {
-    height:22%;
+    height:100%;
     float:left;
     width:30px;
     background:url(../Images/bg.gif) repeat-x bottom;
 }
 
 .daTabsBorder3 {
-    height:22%;
+    height:100%;
     float:left;
     width:30px;
     background:url(../Images/bg.gif) repeat-x bottom;
