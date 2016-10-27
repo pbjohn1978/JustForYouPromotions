@@ -163,6 +163,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\bg.gif" />
+    <Content Include="Images\bodyBackground.gif" />
     <Content Include="Images\HeaderBackgroundImg.gif" />
     <Content Include="Images\justForYouPromotionsPNG.png" />
     <Content Include="Images\SideBarBackgroundImg.gif" />

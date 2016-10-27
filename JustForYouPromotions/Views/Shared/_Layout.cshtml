@@ -7,27 +7,37 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="header">
-        <div>
-            <img class="HeaderLogo" src="~/Images/justForYouPromotionsPNG.png" />
+    <div class="wrap">
+        <div class="banner">
+            <div class="HeaderLogoCont">
+                <img class="HeaderLogo" src="~/Images/justForYouPromotionsPNG.png" />
+            </div>
+
+            <div class="HeaderWordsCont"><h1>Words Words Words</h1></div>
+            <div class="daTabsBorder1"></div>
+            <div class="daTabs">
+                <ul><li id="homeTab">@Html.ActionLink("Home", "Index", "Home")</li></ul>
+                <div class="daTabsBorder2"></div>
+                <ul><li id="prodTab">@Html.ActionLink("Products", "Index", "Products")</li></ul>
+                <div class="daTabsBorder3"></div>
+                <ul><li id="contTab">@Html.ActionLink("Contact", "Index", "Contact")</li></ul>
+            </div>
+            <div class="daTabsBorder4"></div>
         </div>
-        <div>
-            <ul class="daTabs">
-                <li id="contTab">@Html.ActionLink("Contact", "Index", "Contact")</li>
-                <li id="prodTab">@Html.ActionLink("Products", "Index", "Products")</li>
-                <li id="homeTab">@Html.ActionLink("Home", "Index", "Home")</li>
-            </ul>
+        <div class="mainBody">
+            <div class="sideBar">
+                <div>
+                    <h3>Left Side Bar here</h3>
+                </div>
+            </div>
+
+            <div class="content">
+                <div>@RenderBody()</div>
+            </div>
         </div>
-    </div>
-    <div class="SideBarWidth SideBarBackground SideBarTextColor">
-        this is a sidebar... :)
-    </div>
-    <div>
-        @RenderBody()
-        <br />
-        <footer>
+        <div class="footer">
             <p class="text-center">Just 4 You Promotions: @Html.ActionLink("Home", "Index", "Home") | @Html.ActionLink("Products", "Index", "Products") | @Html.ActionLink("Contact", "Index", "Contact")  </p>
-        </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

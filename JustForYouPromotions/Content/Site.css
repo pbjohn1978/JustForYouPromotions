@@ -1,53 +1,200 @@
 ﻿body {
-    padding-top:0px;
-    padding-bottom:0px;
+    margin:0px;
+    padding:0px 0px 0px 0px;
 }
 
-.header {
-    width:100%;
+h1 {
+    margin:0px;
+    padding:0px 0px 0px 0px;
+}
+
+h2 {
+    margin:0px;
+    padding:0px 0px 0px 0px;
+}
+
+h3 {
+    margin:0px;
+    padding:0px 0px 0px 0px;
+}
+
+h4 {
+    margin:0px;
+    padding:0px 0px 0px 0px;
+}
+
+h5 {
+    margin:0px;
+    padding:0px 0px 0px 0px;
+}
+
+h6 {
+    margin:0px;
+    padding:0px 0px 0px 0px;
+}
+
+.daTabs ul {
+    margin:0px;
+    padding:0px 0px 0px 0px;
+}
+
+.wrap{
+	max-width:2000px;
+	min-width:550px;
+}
+
+.banner{
+    background:url(../Images/HeaderBackgroundImg.gif);
     height:150px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    background-image:url(../Images/HeaderBackgroundImg.gif);
+    width:100%;
+	margin:0px;
+	padding:0px;
 }
 
-.SideBarWidth {
-    width:20%;
+.bannerBottomBorder {
+    background:url(../Images/bg.gif) repeat-x bottom;
 }
 
-.SideBarBackground {
-    background-image:url(../Images/SideBarBackgroundImg.gif);
-}
-
-.SideBarTextColor {
-    color:white;
+.HeaderLogoCont {
+    float:left;
+    height:78%;
+    width:25%;
 }
 
 .HeaderLogo {
-    position:absolute;
-    top:20px;
-    left:10px;
-    height:100px;
-    width:225px;
+    padding:0px 10px 10px 10px;
+    height:auto;
+    width:100%;
 }
 
-ul li {
+.HeaderWordsCont {
+    padding:20px 0px 20px 0px;
+    float:right;
+    width:75%;
+    height:25%;
+}
+
+.daTabsBorder1 {
+    height:22%;
+    clear:both;
+    float:left;
+    width:29%;
+    background:url(../Images/bg.gif) repeat-x bottom;
+}
+
+.daTabsBorder2 {
+    height:22%;
+    float:left;
+    width:30px;
+    background:url(../Images/bg.gif) repeat-x bottom;
+}
+
+.daTabsBorder3 {
+    height:22%;
+    float:left;
+    width:30px;
+    background:url(../Images/bg.gif) repeat-x bottom;
+}
+
+.daTabsBorder4 {
+    height:22%;
+    float:left;
+    width:calc(71% - 360px);
+    line-height:24px;
+    background:url(../Images/bg.gif) repeat-x bottom;
+}
+
+.daTabs {
+    float:left;
+    width:360px;
+    height:22%;
+    line-height:24px;
+}
+
+.daTabs ul li {
     text-decoration:none;
+    border:1px solid #000000;
+    background:#2bf12f;
+    display:inline-block;
     list-style:none;
     float:right;
-}
-#contTab {
-    padding:0px 400px 0px 0px;    
-}
-#homeTab {
-    padding:0px 70px 0px 0px;    
-}
-#prodTab {
-    padding:0px 70px 0px 0px;    
+    border-top-left-radius:6px;
+    border-top-right-radius:6px;
 }
 
-.LogoContainer {
-    width:250px;
-    height:150px;
+#homeTab {
+    float:left;
+    border-bottom:1px solid #000000;
+    width:100px;
+    text-align:center;
+    padding:7px 0px 0px 0px;
 }
+#prodTab {
+    float:left;
+    border-bottom:1px solid #000000;
+    width:100px;
+    text-align:center;
+    padding:7px 0px 0px 0px;    
+}
+#contTab {
+    float:left;
+    border-bottom:1px solid #000000;
+    width:100px;
+    text-align:center;
+    padding:7px 0px 0px 0px;    
+}
+
+.mainBody{
+    width:100%;
+    float:left;
+	color:#000000;
+    background:url(../Images/bodyBackground.gif) repeat-y 28% 0%;
+}
+
+.content{
+	float:right;
+	width:71%;
+}
+
+.content div{
+	padding:10px 10px 10px 10px;
+}
+
+.sideBar{
+	float:left;
+	width:29%;
+	color:#1AFF00;
+}
+
+.sideBar div{
+    width:100%;
+	padding:10px 10px 10px 10px;
+}
+
+.footer{
+	clear:both;
+	background:url(../Images/HeaderBackgroundImg.gif);
+	color:#00FF0D;
+}
+
+a:link {
+	color:#170075
+}
+
+a:visited {
+	color:#0024FD;
+}
+
+#homeTab:hover, #homeTab:active {
+	color:#000000;
+    border-bottom:1px solid #62fb39;
+}
+#prodTab:hover, #prodTab:active {
+    color:#000000;
+    border-bottom:1px solid #62fb39;
+}
+#contTab:hover, #contTab:active {
+    color:#000000;
+    border-bottom:1px solid #62fb39;
+}
+
