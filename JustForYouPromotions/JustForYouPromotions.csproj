@@ -169,6 +169,8 @@
     <Content Include="Images\bodyBackground.gif" />
     <Content Include="Images\HeaderBackgroundImg.gif" />
     <Content Include="Images\justForYouPromotionsPNG.png" />
+    <Content Include="Images\sampleProduct1.jpg" />
+    <Content Include="Images\sampleProduct2.jpg" />
     <Content Include="Images\SideBarBackgroundImg.gif" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
