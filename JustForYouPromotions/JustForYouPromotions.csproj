@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -157,9 +158,11 @@
     </Compile>
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\HelperDB.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewUserValidator.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\SiteMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -211,6 +214,9 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Error\IndexErrorDB.cshtml" />
+    <Content Include="Views\Error\IndexCatchAll.cshtml" />
+    <Content Include="Views\Register\RegisterPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

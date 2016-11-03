@@ -1,8 +1,37 @@
 ﻿
+@model JustForYouPromotions.Models.RegisterViewModel
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Register New SiteMember";
 }
 
 
-<h3>This is where the register page will go... :) </h3>
 
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.DisplayName("User Name:")<br />
+        @Html.TextBoxFor(model => model.UserAccessName )
+        <br /><br />
+        @Html.DisplayName("First Name:")<br />
+        @Html.TextBoxFor(model => model.UserFirstName )
+        <br /><br />
+        @Html.DisplayName("Last Name:")<br />
+        @Html.TextBoxFor(model => model.UserLastName )
+        <br /><br />
+        @Html.DisplayName("Email:")<br />
+        @Html.TextBoxFor(model => model.UserEmail )
+        <br /><br />
+        @Html.DisplayName("Do you wish to be added to the email list for deals and promos?")<br />
+        @Html.CheckBoxFor(model => model.UserEmailUpdates )
+        <br /><br />
+        @Html.DisplayName("Password:")<br />
+        @Html.PasswordFor(model => model.Password )
+        <br /><br />
+        @Html.DisplayName("Confirm Password")<br />
+        @Html.PasswordFor(model => model.ConfirmPassword )
+        <br /><br />
+        <input type="submit" value="Add Me!" />
+    }
+</div>
