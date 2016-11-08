@@ -11,6 +11,9 @@ namespace JustForYouPromotions.Models
         public int UserID { get; set; }
 
         [Required]
+        public string UserAccessName { get; set; }
+
+        [Required]
         public string UserFName { get; set; }
 
         [Required]

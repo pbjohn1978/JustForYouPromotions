@@ -18,5 +18,20 @@ namespace JustForYouPromotions.Controllers
         {
             return View();
         }
+
+        public ActionResult UserNameTaken()
+        {
+            return View();
+        }
+
+        public ActionResult EmailTaken()
+        {
+            return View();
+        }
+
+        public ActionResult PasswordsDontMatch()
+        {
+            return View();
+        }
     }
 }

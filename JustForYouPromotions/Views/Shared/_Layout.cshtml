@@ -1,5 +1,4 @@
-﻿@model JustForYouPromotions.Models.LoginModel
-
+﻿
 <!doctype html>
 <html>
 <head>
@@ -29,14 +28,8 @@
         <div class="mainBody">
             <div class="sideBar">
                 <div>
-                    <h3>Sign In:</h3>
-                    <br />
-                    <h5>UserName:</h5>
-                    @Html.TextBoxFor(model => model.UserName)
-                    <h5>Password:</h5>
-                    @Html.PasswordFor(model => model.Password)
-                    <br />
-
+                    <br /><br />
+                    <h3>@Html.ActionLink("Click Me", "Index", "Login") to Sign In.</h3>
                     <br />
                     <span>@Html.ActionLink("Click Me", "Index", "Register")</span><span>  to register for email updates about new products!</span>
                     <br /><br /><br />

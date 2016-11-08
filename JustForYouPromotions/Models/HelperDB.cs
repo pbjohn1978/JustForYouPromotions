@@ -56,5 +56,74 @@ VALUES(@firstname,@lastname,@email,@password,@useremailupdates,@useraccess)";
             }
             return isAdded;
         }
+
+
+        /// <summary>
+        /// takes in a RegisterViewModel object and will return TRUE (bool) if the username is already taken... 
+        /// </summary>
+        /// <param name="nuser">RegisterViewModel object</param>
+        /// <returns>bool</returns>
+        public static bool IsUserNameTaken(RegisterViewModel nuser)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT[UserAccessName]
+FROM[JustForYou].[dbo].[Users]
+where[UserAccessName] = @un";
+
+            cmd.Parameters.AddWithValue("@un", nuser.UserAccessName);
+
+            try
+            {
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                if (rdr.HasRows)
+                    return true;
+                else
+                    return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+
+        /// <summary>
+        /// takes in a RegisterViewModel object and will return TRUE (bool) if the Email is already taken... 
+        /// </summary>
+        /// <param name="nuser">RegisterViewModel object</param>
+        /// <returns>bool</returns>
+        public static bool IsEmailTaken(RegisterViewModel nuser)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT[UserEmail]
+FROM [JustForYou].[dbo].[Users]
+where [UserEmail] = @un";
+
+            cmd.Parameters.AddWithValue("@un", nuser.UserEmail);
+
+            try
+            {
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                if (rdr.HasRows)
+                    return true;
+                else
+                    return false;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }
