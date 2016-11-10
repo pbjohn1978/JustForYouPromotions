@@ -15,6 +15,10 @@ namespace JustForYouPromotions.Controllers
                 return RedirectToAction("Index", "Login");
             Models.SiteMember mem = Models.SessionHelper.GetMember();
 
+            
+
+
+
             return View();
         }
     }
