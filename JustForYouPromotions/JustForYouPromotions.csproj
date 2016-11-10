@@ -154,6 +154,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\UsersPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -164,6 +165,7 @@
     <Compile Include="Models\NewUserValidator.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\SessionHelper.cs" />
     <Compile Include="Models\SiteMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -222,6 +224,7 @@
     <Content Include="Views\Error\EmailTaken.cshtml" />
     <Content Include="Views\Error\PasswordsDontMatch.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\UsersPage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -35,6 +35,7 @@ namespace JustForYouPromotions.Controllers
                     sm.UserPassword = nuser.Password;
                     if (!HelperDB.AddNewUser(sm))
                         return RedirectToAction("IndexErrorDB", "Error");
+                    
                     return View();
                 }
                 else if(validationResult == 1)

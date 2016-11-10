@@ -29,10 +29,14 @@
             <div class="sideBar">
                 <div>
                     <br /><br />
-                    <h3>@Html.ActionLink("Click Me", "Index", "Login") to Sign In.</h3>
-                    <br />
-                    <span>@Html.ActionLink("Click Me", "Index", "Register")</span><span>  to register for email updates about new products!</span>
-                    <br /><br /><br />
+                    @{ if (!JustForYouPromotions.Models.SessionHelper.IsMemberLoggedIn())
+                        {
+                            <h3>@Html.ActionLink("Click Me", "Index", "Login") to Sign In.</h3>
+                            <br />
+                            <span>@Html.ActionLink("Click Me", "Index", "Register")</span><span>  to register for email updates about new products!</span>
+                            <br /><br /><br />
+                        }
+                    }
                     <h3>Announcements:</h3>
                     <br />
                     <p>Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here... Announcement text goes here...</p>

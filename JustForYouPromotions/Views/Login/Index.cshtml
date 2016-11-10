@@ -5,10 +5,13 @@
 }
 
 <br />
+@using (Html.BeginForm())
+{
 <h5>UserName:</h5>
 @Html.TextBoxFor(model => model.UserName)
 <h5>Password:</h5>
 @Html.PasswordFor(model => model.Password)
 <br /><br />
 <input type="submit" value="Login" />
+}
 

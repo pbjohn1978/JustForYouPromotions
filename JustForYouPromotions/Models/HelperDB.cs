@@ -33,8 +33,8 @@ namespace JustForYouPromotions.Models
             SqlConnection con = getMeConnected();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = @"INSERT INTO [dbo].[Users]([UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess])
-VALUES(@firstname,@lastname,@email,@password,@useremailupdates,@useraccess)";
+            cmd.CommandText = @"INSERT INTO [dbo].[Users]([UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName])
+VALUES(@firstname,@lastname,@email,@password,@useremailupdates,@useraccess,@uaccessname)";
 
             cmd.Parameters.AddWithValue("@firstname", sm.UserFName);
             cmd.Parameters.AddWithValue("@lastname", sm.UserLName);
@@ -42,6 +42,7 @@ VALUES(@firstname,@lastname,@email,@password,@useremailupdates,@useraccess)";
             cmd.Parameters.AddWithValue("@password", sm.UserPassword);
             cmd.Parameters.AddWithValue("@useremailupdates", sm.UserEmailUpdates);
             cmd.Parameters.AddWithValue("@useraccess", sm.UserAccess);
+            cmd.Parameters.AddWithValue("@uaccessname", sm.UserAccessName);
 
             try
             {
@@ -124,6 +125,91 @@ where [UserEmail] = @un";
             {
                 con.Close();
             }
+        }
+
+        /// <summary>
+        /// takes in a LoginModel object and returns Null if no user is found... If a user is found it will return a full SiteMember object... :)
+        /// </summary>
+        /// <param name="user">LoginModel object</param>
+        /// <returns> SiteMember object (the object can be returned as null so like check for nulls and stuff... :) )</returns>
+        public static SiteMember getUserLoggedIn(LoginModel user)
+        {
+            SiteMember sm = new SiteMember();
+
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT [UserID],[UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName]
+FROM [dbo].[Users]
+where [UserAccessName] = @un and [UserPassword] = @ps";
+
+            cmd.Parameters.AddWithValue("@un", user.UserName);
+            cmd.Parameters.AddWithValue("@ps", user.Password);
+
+            try
+            {
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                if (rdr.Read())
+                {
+                    
+                    sm.UserFName = rdr["UserFName"].ToString();
+                    sm.UserLName = rdr["UserLName"].ToString();
+                    sm.UserEmail = rdr["UserEmail"].ToString();
+                    sm.UserPassword = rdr["UserPassword"].ToString();
+                    sm.UserEmailUpdates = (bool)rdr["UserEmailUpdates"];
+                    sm.UserAccess = Convert.ToInt32(rdr["UserAccess"]);
+                    sm.UserAccessName = rdr["UserAccessName"].ToString();
+                    sm.UserID = Convert.ToInt32(rdr["UserID"]);
+
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return sm;
+        }
+
+        /// <summary>
+        /// takes in an INT representing the UserID and returns a Full SiteMember Object... :)
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public static SiteMember getMember(int userID)
+        {
+            SiteMember sm = new SiteMember();
+
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT [UserID],[UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName]
+FROM [dbo].[Users]
+where [UserAccessName] = @id";
+
+            cmd.Parameters.AddWithValue("@id", userID);
+
+            try
+            {
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                if (rdr.HasRows)
+                {
+                    sm.UserID = rdr.GetInt32(0);
+                    sm.UserFName = rdr.GetString(1);
+                    sm.UserLName = rdr.GetString(2);
+                    sm.UserEmail = rdr.GetString(3);
+                    sm.UserPassword = rdr.GetString(4);
+                    sm.UserEmailUpdates = rdr.GetBoolean(5);
+                    sm.UserAccess = rdr.GetInt32(6);
+                    sm.UserAccessName = rdr.GetString(7);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return sm;
         }
     }
 }
