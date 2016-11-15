@@ -151,10 +151,12 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvalidCredsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogOutController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SuccessController.cs" />
     <Compile Include="Controllers\UsersPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -227,6 +229,8 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\UsersPage\Index.cshtml" />
     <Content Include="Views\LogOut\Index.cshtml" />
+    <Content Include="Views\Success\Index.cshtml" />
+    <Content Include="Views\InvalidCreds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

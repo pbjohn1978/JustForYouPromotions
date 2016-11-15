@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JustForYouPromotions.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,13 +14,61 @@ namespace JustForYouPromotions.Controllers
         {
             if (!Models.SessionHelper.IsMemberLoggedIn())
                 return RedirectToAction("Index", "Login");
-            Models.SiteMember mem = Models.SessionHelper.GetMember();
-
-            
-
-
-
+            SiteMember mem = SessionHelper.GetMember();
+            if(mem.UserAccessName == null)
+                return RedirectToAction("Index", "InvalidCreds");
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(Models.RegisterViewModel nuser)
+        {
+            try
+            {
+                if (!Models.SessionHelper.IsMemberLoggedIn())
+                    return RedirectToAction("Index", "Login");
+                SiteMember mem = SessionHelper.GetMember();
+
+                if (nuser.UserAccessName == null)
+                    nuser.UserAccessName = mem.UserAccessName;
+                if (nuser.UserEmail == null)
+                    nuser.UserEmail = mem.UserEmail;
+                if (nuser.UserFirstName == null)
+                    nuser.UserFirstName = mem.UserFName;
+                if (nuser.UserLastName == null)
+                    nuser.UserLastName = mem.UserLName;
+                if (nuser.Password == null)
+                    nuser.Password = mem.UserPassword;
+                if (nuser.ConfirmPassword == null)
+                    nuser.ConfirmPassword = mem.UserPassword;
+                
+                int validationResult = ValidatorClass.IsValidUser(nuser);
+                if (validationResult == 0 || validationResult == 3 || validationResult == 1)
+                {
+                    SiteMember sm = new Models.SiteMember();
+                    sm.UserAccess = 1;
+                    sm.UserAccessName = nuser.UserAccessName;
+                    sm.UserFName = nuser.UserFirstName;
+                    sm.UserLName = nuser.UserLastName;
+                    sm.UserEmail = nuser.UserEmail;
+                    sm.UserEmailUpdates = nuser.UserEmailUpdates;
+                    sm.UserPassword = nuser.Password;
+                    sm.UserID = mem.UserID;
+                    if (!HelperDB.AddNewUser(sm))
+                        return RedirectToAction("IndexErrorDB", "Error");
+
+                    return RedirectToAction("Index", "Success");
+                }
+                else if (validationResult == 2)
+                {
+                    return RedirectToAction("PasswordsDontMatch", "Error");
+                }
+                return RedirectToAction("IndexCatchAll", "Error");
+            }
+            catch
+            {
+                return RedirectToAction("IndexCatchAll", "Error");
+            }
         }
     }
 }

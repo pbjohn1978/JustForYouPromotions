@@ -15,7 +15,7 @@ namespace JustForYouPromotions.Models
         /// <returns>SqlConnection</returns>
         public static SqlConnection getMeConnected()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_home"].ConnectionString);
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_schoolBrucesRoom"].ConnectionString);
         }
 
         /// <summary>
@@ -28,34 +28,91 @@ namespace JustForYouPromotions.Models
         /// <returns>bool true=Added Successfully, false=There was an issue...</returns>
         public static bool AddNewUser(SiteMember sm)
         {
-            bool isAdded = true;
+            if (!IsUserInDBYet(SessionHelper.GetMember()))
+            {
+                SqlConnection con = getMeConnected();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandText = @"INSERT INTO [dbo].[Users]([UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName])
+VALUES(@firstname,@lastname,@email,@password,@useremailupdates,@useraccess,@uaccessname)";
 
+                cmd.Parameters.AddWithValue("@firstname", sm.UserFName);
+                cmd.Parameters.AddWithValue("@lastname", sm.UserLName);
+                cmd.Parameters.AddWithValue("@email", sm.UserEmail);
+                cmd.Parameters.AddWithValue("@password", sm.UserPassword);
+                cmd.Parameters.AddWithValue("@useremailupdates", sm.UserEmailUpdates);
+                cmd.Parameters.AddWithValue("@useraccess", sm.UserAccess);
+                cmd.Parameters.AddWithValue("@uaccessname", sm.UserAccessName);
+
+                try
+                {
+                    con.Open();
+                    int rows = cmd.ExecuteNonQuery();
+                    if (rows == 1)
+                        return true;
+                }
+                finally
+                {
+                    con.Close();
+                }
+                return false;
+            }
+            else
+            {
+                SqlConnection con = getMeConnected();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandText = @"UPDATE [dbo].[Users]SET [UserAccessName] = @username,[UserFName] = @first,[UserLName] = @last,[UserEmail] = @email,[UserPassword] = @pass,[UserEmailUpdates] = @updates,[UserAccess] = @accesslevel
+WHERE [UserID] = @user";
+
+                cmd.Parameters.AddWithValue("@first", sm.UserFName);
+                cmd.Parameters.AddWithValue("@last", sm.UserLName);
+                cmd.Parameters.AddWithValue("@email", sm.UserEmail);
+                cmd.Parameters.AddWithValue("@pass", sm.UserPassword);
+                cmd.Parameters.AddWithValue("@updates", sm.UserEmailUpdates);
+                cmd.Parameters.AddWithValue("@accesslevel", sm.UserAccess);
+                cmd.Parameters.AddWithValue("@username", sm.UserAccessName);
+                cmd.Parameters.AddWithValue("@user", sm.UserID);
+
+                try
+                {
+                    con.Open();
+                    int rows = cmd.ExecuteNonQuery();
+                    if (rows == 1)
+                        return true;
+                }
+                finally
+                {
+                    con.Close();
+                }
+                return false;
+            }
+        }
+
+        private static bool IsUserInDBYet(SiteMember sm)
+        {
             SqlConnection con = getMeConnected();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = @"INSERT INTO [dbo].[Users]([UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName])
-VALUES(@firstname,@lastname,@email,@password,@useremailupdates,@useraccess,@uaccessname)";
+            cmd.CommandText = @"SELECT[UserAccessName]
+FROM[JustForYou].[dbo].[Users]
+where[UserAccessName] = @un";
 
-            cmd.Parameters.AddWithValue("@firstname", sm.UserFName);
-            cmd.Parameters.AddWithValue("@lastname", sm.UserLName);
-            cmd.Parameters.AddWithValue("@email", sm.UserEmail);
-            cmd.Parameters.AddWithValue("@password", sm.UserPassword);
-            cmd.Parameters.AddWithValue("@useremailupdates", sm.UserEmailUpdates);
-            cmd.Parameters.AddWithValue("@useraccess", sm.UserAccess);
-            cmd.Parameters.AddWithValue("@uaccessname", sm.UserAccessName);
+            cmd.Parameters.AddWithValue("@un", sm.UserAccessName);
 
             try
             {
                 con.Open();
-                int rows = cmd.ExecuteNonQuery();
-                if (rows == 1)
-                    isAdded = true;
+                SqlDataReader rdr = cmd.ExecuteReader();
+                if (rdr.HasRows)
+                    return true;
+                else
+                    return false;
             }
             finally
             {
                 con.Close();
             }
-            return isAdded;
         }
 
 
@@ -185,7 +242,7 @@ where [UserAccessName] = @un and [UserPassword] = @ps";
             cmd.Connection = con;
             cmd.CommandText = @"SELECT [UserID],[UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName]
 FROM [dbo].[Users]
-where [UserAccessName] = @id";
+where [UserID] = @id";
 
             cmd.Parameters.AddWithValue("@id", userID);
 
@@ -193,17 +250,21 @@ where [UserAccessName] = @id";
             {
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
-                if (rdr.HasRows)
+                if (rdr.Read())
                 {
-                    sm.UserID = rdr.GetInt32(0);
-                    sm.UserFName = rdr.GetString(1);
-                    sm.UserLName = rdr.GetString(2);
-                    sm.UserEmail = rdr.GetString(3);
-                    sm.UserPassword = rdr.GetString(4);
-                    sm.UserEmailUpdates = rdr.GetBoolean(5);
-                    sm.UserAccess = rdr.GetInt32(6);
-                    sm.UserAccessName = rdr.GetString(7);
+                    sm.UserFName = rdr["UserFName"].ToString();
+                    sm.UserLName = rdr["UserLName"].ToString();
+                    sm.UserEmail = rdr["UserEmail"].ToString();
+                    sm.UserPassword = rdr["UserPassword"].ToString();
+                    sm.UserEmailUpdates = (bool)rdr["UserEmailUpdates"];
+                    sm.UserAccess = Convert.ToInt32(rdr["UserAccess"]);
+                    sm.UserAccessName = rdr["UserAccessName"].ToString();
+                    sm.UserID = Convert.ToInt32(rdr["UserID"]);
                 }
+            }
+            catch
+            {
+                return sm;
             }
             finally
             {
