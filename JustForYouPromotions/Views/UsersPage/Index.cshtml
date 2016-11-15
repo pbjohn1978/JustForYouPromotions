@@ -1,6 +1,5 @@
 ﻿
 @model JustForYouPromotions.Models.RegisterViewModel
-
 @{
     ViewBag.Title = "Index";
 }
@@ -10,17 +9,22 @@
 <div>
     @using (Html.BeginForm())
     {
+        string userName = (string)TempData["username"];
+        string firstName = (string)TempData["first"];
+        string lastName = (string)TempData["last"];
+        string email = (string)TempData["email"];
+        string password = (string)TempData["pass"];
         @Html.DisplayName("User Name:")<br />
-        @Html.TextBoxFor(model => model.UserAccessName)
+        @Html.TextBoxFor(model => model.UserAccessName , new { placeholder = userName })
         <br /><br />
         @Html.DisplayName("First Name:")<br />
-        @Html.TextBoxFor(model => model.UserFirstName)
+        @Html.TextBoxFor(model => model.UserFirstName, new { placeholder = firstName })
         <br /><br />
         @Html.DisplayName("Last Name:")<br />
-        @Html.TextBoxFor(model => model.UserLastName)
+        @Html.TextBoxFor(model => model.UserLastName, new { placeholder = lastName })
         <br /><br />
         @Html.DisplayName("Email:")<br />
-        @Html.TextBoxFor(model => model.UserEmail)
+        @Html.TextBoxFor(model => model.UserEmail, new { placeholder = email })
         <br /><br />
         @Html.DisplayName("Do you wish to be added to the email list for deals and promos?")<br />
         @Html.CheckBoxFor(model => model.UserEmailUpdates)

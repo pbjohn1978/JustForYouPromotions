@@ -28,6 +28,12 @@ namespace JustForYouPromotions.Controllers
                     return RedirectToAction("Index", "Login");
                 //create session for user
                 Session["memid"] = sm.UserID;
+                TempData["username"] = sm.UserAccessName;
+                TempData["first"] = sm.UserFName;
+                TempData["last"] = sm.UserLName;
+                TempData["email"] = sm.UserEmail;
+                TempData["e-update"] = sm.UserEmailUpdates;
+                TempData["pass"] = sm.UserPassword;
                 return RedirectToAction("Index", "UsersPage");
             }
             return RedirectToAction("Index", "Home");

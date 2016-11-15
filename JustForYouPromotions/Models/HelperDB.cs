@@ -15,7 +15,7 @@ namespace JustForYouPromotions.Models
         /// <returns>SqlConnection</returns>
         public static SqlConnection getMeConnected()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_schoolBrucesRoom"].ConnectionString);
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_home"].ConnectionString);
         }
 
         /// <summary>
