@@ -15,9 +15,15 @@ namespace JustForYouPromotions.Controllers
             if (!Models.SessionHelper.IsMemberLoggedIn())
                 return RedirectToAction("Index", "Login");
             SiteMember mem = SessionHelper.GetMember();
-            if(mem.UserAccessName == null)
-                return RedirectToAction("Index", "InvalidCreds");
-            return View();
+            RegisterViewModel update = new RegisterViewModel();
+            update.ConfirmPassword = mem.UserPassword;
+            update.Password = mem.UserPassword;
+            update.UserAccessName = mem.UserAccessName;
+            update.UserEmail = mem.UserEmail;
+            update.UserEmailUpdates = mem.UserEmailUpdates;
+            update.UserFirstName = mem.UserFName;
+            update.UserLastName = mem.UserLName;
+            return View(update);
         }
 
         [HttpPost]
