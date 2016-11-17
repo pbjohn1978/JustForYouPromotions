@@ -29,7 +29,7 @@
             <div class="sideBar">
                 <div>
                     <br /><br />
-                    @{ 
+                    @{
                         if (!JustForYouPromotions.Models.SessionHelper.IsMemberLoggedIn())
                         {
                             <h3>@Html.ActionLink("Click Me", "Index", "Login") to Sign In.</h3>
@@ -42,7 +42,9 @@
                             <h3>@Html.ActionLink("Log Out", "Index", "LogOut")</h3><br />
                             if (JustForYouPromotions.Models.SessionHelper.IsAdminSession())
                             {
-                                <h3>@Html.ActionLink("Admin Page", "Index", "Admin")</h3><br /><br />
+                                <h3>@Html.ActionLink("Admin Page", "Index", "Admin")</h3><br />
+                                <h3>@Html.ActionLink("Register a new user", "Index", "Register")</h3>
+                                <br /><br />
                             }
                         }
                     }
