@@ -28,6 +28,8 @@ namespace JustForYouPromotions.Controllers
                     return RedirectToAction("Index", "InvalidCreds");
                 //create session for user
                 Session["memid"] = sm.UserID;
+                if(SessionHelper.IsAdminSession())
+                    return RedirectToAction("Index", "Admin");
                 TempData["username"] = sm.UserAccessName;
                 TempData["first"] = sm.UserFName;
                 TempData["last"] = sm.UserLName;

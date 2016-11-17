@@ -237,3 +237,8 @@ a:visited {
 span.tab {
     padding:0px 0px 0px 80px;
 }
+
+.adminTablePadding th {
+    border:groove;
+    padding:10px 15px 10px 15px;
+}

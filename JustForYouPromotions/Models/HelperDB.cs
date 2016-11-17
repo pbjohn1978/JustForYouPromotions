@@ -15,7 +15,7 @@ namespace JustForYouPromotions.Models
         /// <returns>SqlConnection</returns>
         public static SqlConnection getMeConnected()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_home"].ConnectionString);
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_school"].ConnectionString);
         }
 
         internal static bool DeleteMe(int userID)
@@ -184,6 +184,42 @@ where[UserAccessName] = @un";
         }
 
 
+        /// <summary>
+        /// takes in a string representing the username and will return and INT representing the number of rows in the database with a matching UserAccessName
+        /// </summary>
+        /// <param name="nuser">RegisterViewModel object</param>
+        /// <returns>int</returns>
+        public static int IsUserNameTaken(string userName)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT[UserAccessName]
+FROM[JustForYou].[dbo].[Users]
+where[UserAccessName] = @un";
+
+            cmd.Parameters.AddWithValue("@un", userName);
+
+            try
+            {
+                con.Open();
+                int rows = 0;
+                SqlDataReader rdr = cmd.ExecuteReader();
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                        rows++;
+                    return rows;
+                }
+                else
+                    return rows;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
 
         /// <summary>
         /// takes in a RegisterViewModel object and will return the number of rows in the database matching the UserEmail with the UserEmail in the RegisterViewModel.
@@ -224,6 +260,49 @@ where [UserEmail] = @un";
                 con.Close();
             }
         }
+
+
+        /// <summary>
+        /// takes in a string representing an users Email and will return the number of rows in the database matching the UserEmail with the UserEmail in the RegisterViewModel.
+        /// </summary>
+        /// <param name="nuser">RegisterViewModel object</param>
+        /// <returns>int</returns>
+        public static int IsEmailTaken(string email)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT[UserEmail]
+FROM [JustForYou].[dbo].[Users]
+where [UserEmail] = @un";
+
+            cmd.Parameters.AddWithValue("@un", email);
+
+            try
+            {
+                con.Open();
+                int rows = 0;
+                SqlDataReader rdr = cmd.ExecuteReader();
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                        rows++;
+                    return rows;
+                }
+                else
+                    return rows;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
 
         /// <summary>
         /// takes in a LoginModel object and returns Null if no user is found... If a user is found it will return a full SiteMember object... :)

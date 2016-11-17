@@ -1,0 +1,36 @@
+﻿
+@model JustForYouPromotions.Models.SiteMember
+@{
+    ViewBag.Title = "Update User";
+}
+
+<h2>After Updating please click "Submit" to Re-Submit the user's data.</h2>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        <br /><br />
+        @Html.DisplayName("User ID:")<br />
+        @ViewBag.mem.UserID
+        <br /><br />
+        @Html.DisplayName("User Name:")<br />
+        @Html.TextBoxFor(model => model.UserAccessName, new { placeholder = ViewBag.mem.UserAccessName })
+        <br /><br />
+        @Html.DisplayName("First Name:")<br />
+        @Html.TextBoxFor(model => model.UserFName, new { placeholder = ViewBag.mem.UserFName })
+        <br /><br />
+        @Html.DisplayName("Last Name:")<br />
+        @Html.TextBoxFor(model => model.UserLName, new { placeholder = ViewBag.mem.UserLName })
+        <br /><br />
+        @Html.DisplayName("Email:")<br />
+        @Html.TextBoxFor(model => model.UserEmail, new { placeholder = ViewBag.mem.UserEmail })
+        <br /><br />
+        @Html.DisplayName("User Access Level:")<br />
+        @Html.TextBoxFor(model => model.UserAccess, new { placeholder = ViewBag.mem.UserAccess })
+        <br /><br />
+        @Html.DisplayName("Password:")<br />
+        @Html.TextBoxFor(model => model.UserPassword )
+        <br /><br />
+        <input type="submit" value="SUBMIT" />
+    }
+</div>

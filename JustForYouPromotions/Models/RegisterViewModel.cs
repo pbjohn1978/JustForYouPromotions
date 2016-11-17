@@ -30,5 +30,7 @@ namespace JustForYouPromotions.Models
 
         [Required]
         public bool UserEmailUpdates { get; set; }
+
+        public int UserID { get; set; }
     }
 }

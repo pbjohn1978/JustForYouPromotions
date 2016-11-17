@@ -1,13 +1,16 @@
 ﻿
 @{
-    ViewBag.Title = "Admin Page";
+    ViewBag.Title = "Admin Members Page";
 }
+<br /><br /><br /><br />
+<span>@Html.ActionLink("Members", "Index", "Admin")  |  @Html.ActionLink("Products", "Index", "AdminProducts")  |  @Html.ActionLink("Announcements", "Index", "AdminAnnouncements")</span>
 
 <br /><br />
 <h2>Members</h2>
-<table style="width:100%">
+<table class="adminTablePadding">
     <tr>
         <th>ID #</th>
+        <th>Update</th>
         <th>UN:</th>
         <th>First</th>
         <th>Last</th>
@@ -22,6 +25,7 @@
         {
             <tr>
                 <th>@item.UserID</th>
+                <th>@Html.ActionLink("Update", "Index", "UpdateUserFromAdmin", new { UserID = item.UserID }, null)</th>
                 <th>@item.UserAccessName</th>
                 <th>@item.UserFName</th>
                 <th>@item.UserLName</th>

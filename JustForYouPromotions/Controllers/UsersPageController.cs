@@ -71,6 +71,14 @@ namespace JustForYouPromotions.Controllers
                 {
                     return RedirectToAction("PasswordsDontMatch", "Error");
                 }
+                else if (validationResult == 1)
+                {
+                    return RedirectToAction("UserNameTaken", "Error");
+                }
+                else if (validationResult == 3)
+                {
+                    return RedirectToAction("EmailTaken", "Error");
+                }
                 return RedirectToAction("IndexCatchAll", "Error");
             }
             catch
