@@ -16,18 +16,21 @@ namespace JustForYouPromotions.Models
 
         public static Models.SiteMember GetMember()
         {
-            SiteMember mem = HelperDB.getMember((int)HttpContext.Current.Session["memid"]);
+            int memID = Convert.ToInt32(HttpContext.Current.Session["memid"]);
+            SiteMember mem = HelperDB.getMember(memID);
             return mem;
         }
 
-        //public static bool IsAdminSession()
-        //{
-        //    if (HttpContext.Current.Session["MemberName"] != null)
-        //    {
-        //        if (HelperDB.GetMember(HttpContext.Current.Session["memid"].ToString()).AccessLevel > 1)
-        //            return true;
-        //    }
-        //    return false;
-        //}
+        public static bool IsAdminSession()
+        {
+            if (HttpContext.Current.Session["memid"] != null)
+            {
+                int memID = Convert.ToInt32(HttpContext.Current.Session["memid"]);
+                SiteMember mem = HelperDB.getMember(memID);
+                if (mem.UserAccess > 1)
+                    return true;
+            }
+            return false;
+        }
     }
 }

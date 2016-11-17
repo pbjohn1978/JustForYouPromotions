@@ -29,6 +29,8 @@ namespace JustForYouPromotions.Controllers
         [HttpPost]
         public ActionResult Index(Models.RegisterViewModel nuser)
         {
+            if (!Models.SessionHelper.IsMemberLoggedIn())
+                return RedirectToAction("Index", "Login");
             try
             {
                 if (!Models.SessionHelper.IsMemberLoggedIn())
@@ -47,9 +49,9 @@ namespace JustForYouPromotions.Controllers
                     nuser.Password = mem.UserPassword;
                 if (nuser.ConfirmPassword == null)
                     nuser.ConfirmPassword = mem.UserPassword;
-                
-                int validationResult = ValidatorClass.IsValidUser(nuser);
-                if (validationResult == 0 || validationResult == 3 || validationResult == 1)
+
+                int validationResult = ValidatorClass.IsValidUserUpdating(nuser);
+                if (validationResult == 0)
                 {
                     SiteMember sm = new Models.SiteMember();
                     sm.UserAccess = 1;
@@ -60,7 +62,7 @@ namespace JustForYouPromotions.Controllers
                     sm.UserEmailUpdates = nuser.UserEmailUpdates;
                     sm.UserPassword = nuser.Password;
                     sm.UserID = mem.UserID;
-                    if (!HelperDB.AddNewUser(sm))
+                    if (!HelperDB.UpdateUserInDB(sm))
                         return RedirectToAction("IndexErrorDB", "Error");
 
                     return RedirectToAction("Index", "Success");

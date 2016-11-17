@@ -15,7 +15,32 @@ namespace JustForYouPromotions.Models
         /// <returns>SqlConnection</returns>
         public static SqlConnection getMeConnected()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_schoolBrucesRoom"].ConnectionString);
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_home"].ConnectionString);
+        }
+
+        internal static bool DeleteMe(int userID)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"DELETE FROM [dbo].[Users]
+      WHERE [UserID] = @id";
+
+            cmd.Parameters.AddWithValue("@id", userID);
+
+            try
+            {
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows > 0)
+                    return true;
+                else
+                    return false;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         /// <summary>
@@ -28,66 +53,72 @@ namespace JustForYouPromotions.Models
         /// <returns>bool true=Added Successfully, false=There was an issue...</returns>
         public static bool AddNewUser(SiteMember sm)
         {
-            if (!IsUserInDBYet(SessionHelper.GetMember()))
-            {
-                SqlConnection con = getMeConnected();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandText = @"INSERT INTO [dbo].[Users]([UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName])
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"INSERT INTO [dbo].[Users]([UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName])
 VALUES(@firstname,@lastname,@email,@password,@useremailupdates,@useraccess,@uaccessname)";
 
-                cmd.Parameters.AddWithValue("@firstname", sm.UserFName);
-                cmd.Parameters.AddWithValue("@lastname", sm.UserLName);
-                cmd.Parameters.AddWithValue("@email", sm.UserEmail);
-                cmd.Parameters.AddWithValue("@password", sm.UserPassword);
-                cmd.Parameters.AddWithValue("@useremailupdates", sm.UserEmailUpdates);
-                cmd.Parameters.AddWithValue("@useraccess", sm.UserAccess);
-                cmd.Parameters.AddWithValue("@uaccessname", sm.UserAccessName);
+            cmd.Parameters.AddWithValue("@firstname", sm.UserFName);
+            cmd.Parameters.AddWithValue("@lastname", sm.UserLName);
+            cmd.Parameters.AddWithValue("@email", sm.UserEmail);
+            cmd.Parameters.AddWithValue("@password", sm.UserPassword);
+            cmd.Parameters.AddWithValue("@useremailupdates", sm.UserEmailUpdates);
+            cmd.Parameters.AddWithValue("@useraccess", sm.UserAccess);
+            cmd.Parameters.AddWithValue("@uaccessname", sm.UserAccessName);
 
-                try
-                {
-                    con.Open();
-                    int rows = cmd.ExecuteNonQuery();
-                    if (rows == 1)
-                        return true;
-                }
-                finally
-                {
-                    con.Close();
-                }
-                return false;
-            }
-            else
+            try
             {
-                SqlConnection con = getMeConnected();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandText = @"UPDATE [dbo].[Users]SET [UserAccessName] = @username,[UserFName] = @first,[UserLName] = @last,[UserEmail] = @email,[UserPassword] = @pass,[UserEmailUpdates] = @updates,[UserAccess] = @accesslevel
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows == 1)
+                    return true;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return false;
+            
+        }
+
+        /// <summary>
+        ///  this methoud will Update a SiteMember object in the Just For You Database... MAKE SURE THE SiteMember OBJECT IS VALID BEFORE PASSING IT TO THIS METHOUD!!!!!!!!!!!!!!!!
+        ///  
+        /// </summary>
+        /// <param name="sm">takes in a SiteMember object</param>
+        /// <returns>bool true=Added Successfully, false=There was an issue...</returns>
+        public static bool UpdateUserInDB(SiteMember sm)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"UPDATE [dbo].[Users]SET [UserAccessName] = @username,[UserFName] = @first,[UserLName] = @last,[UserEmail] = @email,[UserPassword] = @pass,[UserEmailUpdates] = @updates,[UserAccess] = @accesslevel
 WHERE [UserID] = @user";
 
-                cmd.Parameters.AddWithValue("@first", sm.UserFName);
-                cmd.Parameters.AddWithValue("@last", sm.UserLName);
-                cmd.Parameters.AddWithValue("@email", sm.UserEmail);
-                cmd.Parameters.AddWithValue("@pass", sm.UserPassword);
-                cmd.Parameters.AddWithValue("@updates", sm.UserEmailUpdates);
-                cmd.Parameters.AddWithValue("@accesslevel", sm.UserAccess);
-                cmd.Parameters.AddWithValue("@username", sm.UserAccessName);
-                cmd.Parameters.AddWithValue("@user", sm.UserID);
+            cmd.Parameters.AddWithValue("@first", sm.UserFName);
+            cmd.Parameters.AddWithValue("@last", sm.UserLName);
+            cmd.Parameters.AddWithValue("@email", sm.UserEmail);
+            cmd.Parameters.AddWithValue("@pass", sm.UserPassword);
+            cmd.Parameters.AddWithValue("@updates", sm.UserEmailUpdates);
+            cmd.Parameters.AddWithValue("@accesslevel", sm.UserAccess);
+            cmd.Parameters.AddWithValue("@username", sm.UserAccessName);
+            cmd.Parameters.AddWithValue("@user", sm.UserID);
 
-                try
-                {
-                    con.Open();
-                    int rows = cmd.ExecuteNonQuery();
-                    if (rows == 1)
-                        return true;
-                }
-                finally
-                {
-                    con.Close();
-                }
-                return false;
+            try
+            {
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows == 1)
+                    return true;
             }
+            finally
+            {
+                con.Close();
+            }
+            return false;
         }
+
 
         private static bool IsUserInDBYet(SiteMember sm)
         {
@@ -117,11 +148,11 @@ where[UserAccessName] = @un";
 
 
         /// <summary>
-        /// takes in a RegisterViewModel object and will return TRUE (bool) if the username is already taken... 
+        /// takes in a RegisterViewModel object and will return and INT representing the number of rows in the database with a matching UserAccessName
         /// </summary>
         /// <param name="nuser">RegisterViewModel object</param>
-        /// <returns>bool</returns>
-        public static bool IsUserNameTaken(RegisterViewModel nuser)
+        /// <returns>int</returns>
+        public static int IsUserNameTaken(RegisterViewModel nuser)
         {
             SqlConnection con = getMeConnected();
             SqlCommand cmd = new SqlCommand();
@@ -135,11 +166,16 @@ where[UserAccessName] = @un";
             try
             {
                 con.Open();
+                int rows = 0;
                 SqlDataReader rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
-                    return true;
+                {
+                    while (rdr.Read())
+                        rows++;
+                    return rows;
+                }
                 else
-                    return false;
+                    return rows;
             }
             finally
             {
@@ -150,11 +186,11 @@ where[UserAccessName] = @un";
 
 
         /// <summary>
-        /// takes in a RegisterViewModel object and will return TRUE (bool) if the Email is already taken... 
+        /// takes in a RegisterViewModel object and will return the number of rows in the database matching the UserEmail with the UserEmail in the RegisterViewModel.
         /// </summary>
         /// <param name="nuser">RegisterViewModel object</param>
-        /// <returns>bool</returns>
-        public static bool IsEmailTaken(RegisterViewModel nuser)
+        /// <returns>int</returns>
+        public static int IsEmailTaken(RegisterViewModel nuser)
         {
             SqlConnection con = getMeConnected();
             SqlCommand cmd = new SqlCommand();
@@ -168,11 +204,16 @@ where [UserEmail] = @un";
             try
             {
                 con.Open();
+                int rows = 0;
                 SqlDataReader rdr = cmd.ExecuteReader();
                 if (rdr.HasRows)
-                    return true;
+                {
+                    while (rdr.Read())
+                        rows++;
+                    return rows;
+                }
                 else
-                    return false;
+                    return rows;
             }
             catch (SqlException ex)
             {
@@ -271,6 +312,49 @@ where [UserID] = @id";
                 con.Close();
             }
             return sm;
+        }
+
+        /// <summary>
+        /// takes in nothing and returns a list of SiteMember objects...
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns>List of SiteMember objects</returns>
+        public static List<SiteMember> getAllMembers()
+        {
+            List<SiteMember> sitemembers = new List<SiteMember>();
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT [UserID],[UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName]
+FROM [dbo].[Users]";
+            
+            try
+            {
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    SiteMember sm = new SiteMember();
+                    sm.UserFName = rdr["UserFName"].ToString();
+                    sm.UserLName = rdr["UserLName"].ToString();
+                    sm.UserEmail = rdr["UserEmail"].ToString();
+                    sm.UserPassword = rdr["UserPassword"].ToString();
+                    sm.UserEmailUpdates = (bool)rdr["UserEmailUpdates"];
+                    sm.UserAccess = Convert.ToInt32(rdr["UserAccess"]);
+                    sm.UserAccessName = rdr["UserAccessName"].ToString();
+                    sm.UserID = Convert.ToInt32(rdr["UserID"]);
+                    sitemembers.Add(sm);
+                }
+            }
+            catch
+            {
+                return sitemembers;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return sitemembers;
         }
     }
 }

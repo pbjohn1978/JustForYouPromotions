@@ -28,7 +28,7 @@ namespace JustForYouPromotions.Controllers
                 //validate userName and Password
                 SiteMember sm = HelperDB.getUserLoggedIn(user);
                 if (sm.UserAccessName == null)
-                    return RedirectToAction("Index", "Login");
+                    return RedirectToAction("Index", "InvalidCreds");
                 //create session for user
                 Session["memid"] = sm.UserID;
                 TempData["username"] = sm.UserAccessName;
@@ -39,7 +39,7 @@ namespace JustForYouPromotions.Controllers
                 TempData["pass"] = sm.UserPassword;
                 return RedirectToAction("Index", "UsersPage");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "InvalidCreds");
         }
 
     }

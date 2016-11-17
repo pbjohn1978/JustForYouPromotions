@@ -25,11 +25,25 @@ namespace JustForYouPromotions.Models
 
             if (!(nuser.Password.Equals(nuser.ConfirmPassword)))
                 return 2;
-            //TODO: Add UserAccessName column to db... the line below is untested and cant be tested until the column is added... :)
-            //////if (HelperDB.IsUserNameTaken(nuser))
-            //////    return 1;
 
-            if (HelperDB.IsEmailTaken(nuser))
+            if (HelperDB.IsUserNameTaken(nuser) > 0)
+                return 1;
+
+            if (HelperDB.IsEmailTaken(nuser) > 0)
+                return 3;
+
+            return 0;
+        }
+
+        public static int IsValidUserUpdating(RegisterViewModel nu)
+        {
+            if (!(nu.Password.Equals(nu.ConfirmPassword)))
+                return 2;
+
+            if ( HelperDB.IsUserNameTaken(nu) > 1)
+                return 1;
+
+            if (HelperDB.IsEmailTaken(nu) > 1)
                 return 3;
 
             return 0;

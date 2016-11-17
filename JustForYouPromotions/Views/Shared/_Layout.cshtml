@@ -39,7 +39,11 @@
                         }
                         else
                         {
-                            <h3>@Html.ActionLink("Click to Log Out.", "Index", "LogOut")</h3>
+                            <h3>@Html.ActionLink("Log Out", "Index", "LogOut")</h3><br />
+                            if (JustForYouPromotions.Models.SessionHelper.IsAdminSession())
+                            {
+                                <h3>@Html.ActionLink("Admin Page", "Index", "Admin")</h3><br /><br />
+                            }
                         }
                     }
                     <h3>Announcements:</h3>
