@@ -14,6 +14,10 @@ namespace JustForYouPromotions.Controllers
         {
             if (!SessionHelper.IsAdminSession())
                 return RedirectToAction("Index", "Login");
+
+            List<Announcement> allAnnounce = HelperDB.GetMeAllTheAnnouncmentsPweez();
+            ViewBag.prods = allAnnounce;
+
             return View();
         }
     }

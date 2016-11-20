@@ -7,3 +7,30 @@
 
 <br /><br />
 <h2>Announcements</h2>
+<table class="adminTablePadding">
+    <tr>
+        <th>ID:</th>
+        <th>Update</th>
+        <th>Name:</th>
+        <th>Desc:</th>
+        <th>Expiration Date:</th>
+        <th>Announce Date:</th>
+        <th>Delete</th>
+    </tr>
+    @{
+        <tr>
+            @{
+                foreach (var item in ViewBag.prods)
+                {
+                    <th>@item.AnnouncementID</th>
+                    <th>@Html.ActionLink("Update", "Index", "UpdateAnnouncememtFromAdmin", new { UserID = item.AnnouncementID }, null)</th>
+                    <th>@item.AnnouncementName</th>
+                    <th>@item.AnnouncementDescription</th>
+                    <th>@item.AnnouncementExpireDate</th>
+                    <th>@item.AnnouncementDate</th>
+                    <th>@Html.ActionLink("Delete", "Index", "DeleteAnnouncement", new { UserID = item.AnnouncementID }, null)</th>
+                }
+             }
+        </tr>
+    }
+</table>

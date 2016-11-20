@@ -15,7 +15,42 @@ namespace JustForYouPromotions.Models
         /// <returns>SqlConnection</returns>
         public static SqlConnection getMeConnected()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_school"].ConnectionString);
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_home"].ConnectionString);
+        }
+
+        internal static List<Announcement> GetMeAllTheAnnouncmentsPweez()
+        {
+            List<Announcement> AllAnounc = new List<Announcement>();
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT [AnnouncmentID],[AnnouncmentName],[AnnouncmentDescription],[AnnouncmentExpireDate],[AnnouncmentDate]
+FROM [JustForYou].[dbo].[Announcements]";
+
+            try
+            {
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Announcement an = new Announcement();
+                    an.AnnouncementID = Convert.ToInt32(rdr["AnnouncmentID"]);
+                    an.AnnouncementName = rdr["AnnouncmentName"].ToString();
+                    an.AnnouncementDescription = rdr["AnnouncmentDescription"].ToString();
+                    an.AnnouncementExpireDate = Convert.ToDateTime(rdr["AnnouncmentExpireDate"]);
+                    an.AnnouncementDate = Convert.ToDateTime(rdr["AnnouncmentDate"]);
+                    AllAnounc.Add(an);
+                }
+            }
+            catch
+            {
+                return AllAnounc;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return AllAnounc;
         }
 
         internal static bool DeleteMe(int userID)
