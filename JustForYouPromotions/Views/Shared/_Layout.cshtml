@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="footer">
-            <p class="text-center">|  @Html.ActionLink("Home", "Index", "Home")  |  @Html.ActionLink("Products", "Index", "Products")  |  @Html.ActionLink("Contact", "Index", "Contact")  |  @{ if (JustForYouPromotions.Models.SessionHelper.IsMemberLoggedIn()) { @Html.ActionLink("Update Your User Info", "Index", "UsersPage") } }</p>
+            <p class="text-center">|  @Html.ActionLink("Home", "Index", "Home")  |  @Html.ActionLink("Products", "Index", "Products")  |  @Html.ActionLink("Contact", "Index", "Contact")  |  @{if (JustForYouPromotions.Models.SessionHelper.IsAdminSession()) { } else if (JustForYouPromotions.Models.SessionHelper.IsMemberLoggedIn()) { @Html.ActionLink("Update Your User Info", "Index", "UsersPage") } }</p>
         </div>
     </div>
 

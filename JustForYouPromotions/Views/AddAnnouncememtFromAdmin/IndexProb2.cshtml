@@ -1,0 +1,31 @@
+﻿
+@model JustForYouPromotions.Models.Announcement
+@{
+    ViewBag.Title = "IndexProb";
+}
+
+
+@{
+    if (ViewBag.mess != null)
+    {
+        <h2>@ViewBag.mess</h2>
+    }
+}
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.DisplayName("Announcement Name:")<br />
+        @Html.TextBoxFor(model => model.AnnouncementName)
+        <br /><br />
+        @Html.DisplayName("Description:")<br />
+        @Html.TextAreaFor(model => model.AnnouncementDescription);
+        <br /><br />
+        @Html.DisplayName("Expiration Date (format mm-dd-yyyy):")<br />
+        @Html.TextBoxFor(model => model.AnnouncementExpireDate)
+        <br /><br />
+        @Html.DisplayName("Announcement Date (format mm-dd-yyyy):")<br />
+        @Html.TextBoxFor(model => model.AnnouncementDate)
+        <input type="submit" value="Add Me!" />
+    }
+</div>

@@ -242,3 +242,8 @@ span.tab {
     border:groove;
     padding:10px 15px 10px 15px;
 }
+
+.resizer {
+    width:90%;
+    height:150px;
+}

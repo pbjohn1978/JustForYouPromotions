@@ -37,8 +37,8 @@ FROM [JustForYou].[dbo].[Announcements]";
                     an.AnnouncementID = Convert.ToInt32(rdr["AnnouncmentID"]);
                     an.AnnouncementName = rdr["AnnouncmentName"].ToString();
                     an.AnnouncementDescription = rdr["AnnouncmentDescription"].ToString();
-                    an.AnnouncementExpireDate = Convert.ToDateTime(rdr["AnnouncmentExpireDate"]);
-                    an.AnnouncementDate = Convert.ToDateTime(rdr["AnnouncmentDate"]);
+                    an.AnnouncementExpireDate = Convert.ToDateTime(rdr["AnnouncmentExpireDate"]).Date;
+                    an.AnnouncementDate = Convert.ToDateTime(rdr["AnnouncmentDate"]).Date;
                     AllAnounc.Add(an);
                 }
             }
@@ -114,7 +114,6 @@ VALUES(@firstname,@lastname,@email,@password,@useremailupdates,@useraccess,@uacc
                 con.Close();
             }
             return false;
-            
         }
 
         /// <summary>
@@ -469,6 +468,37 @@ FROM [dbo].[Users]";
                 con.Close();
             }
             return sitemembers;
+        }
+
+        internal static bool PutAnnouncementInDB(Announcement an)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"INSERT INTO [dbo].[Announcements]([AnnouncmentName],[AnnouncmentDescription],[AnnouncmentExpireDate],[AnnouncmentDate])
+VALUES(@name,@desc,@expdate,@date)";
+
+            cmd.Parameters.AddWithValue("@name", an.AnnouncementName);
+            cmd.Parameters.AddWithValue("@desc", an.AnnouncementDescription);
+            cmd.Parameters.AddWithValue("@expdate", an.AnnouncementExpireDate);
+            cmd.Parameters.AddWithValue("@date", an.AnnouncementDate);
+
+            try
+            {
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows == 1)
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return false;
         }
     }
 }
