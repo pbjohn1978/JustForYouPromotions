@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AddAnnouncememtFromAdminController.cs" />
+    <Compile Include="Controllers\AddProductFromAdminController.cs" />
     <Compile Include="Controllers\AdminAnnouncementsController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminProductsController.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NewUserValidator.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\SessionHelper.cs" />
     <Compile Include="Models\SiteMember.cs" />
@@ -248,6 +250,8 @@
     <Content Include="Views\AddAnnouncememtFromAdmin\IndexProb.cshtml" />
     <Content Include="Views\AddAnnouncememtFromAdmin\IndexProb2.cshtml" />
     <Content Include="Views\DeleteAnnouncement\Index.cshtml" />
+    <Content Include="Views\AddProductFromAdmin\Index.cshtml" />
+    <Content Include="Views\AddProductFromAdmin\IndexPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

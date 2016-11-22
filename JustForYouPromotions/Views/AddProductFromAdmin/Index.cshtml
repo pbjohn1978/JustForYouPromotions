@@ -1,0 +1,20 @@
+﻿@model JustForYouPromotions.Models.ProductModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Index", "AddProductFromAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.DisplayName("Product Name:")<br />
+@Html.TextBoxFor(model => model.ProductName)
+<br /><br />
+@Html.DisplayName("Description:")<br />
+@Html.TextAreaFor(model => model.ProductDesc)
+<br /><br />
+@Html.DisplayName("Alternate Text (This is required)")<br />
+@Html.TextBoxFor(model => model.AltText)
+<br />
+<input type="file" name="prodPhoto" />
+<br />
+<input type="submit" value="Add Me!" />
+}

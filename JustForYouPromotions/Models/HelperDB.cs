@@ -78,6 +78,35 @@ FROM [JustForYou].[dbo].[Announcements]";
             return AllAnounc;
         }
 
+        internal static bool PutProductInTheDB(Product p)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"INSERT INTO [dbo].[Products]([CategoryID],[ProductName],[ProductDescription],[ProductImgPath],[ProductThumbPath],[ProductAltText])
+VALUES( @catid, @name, @desc, @path, @thumbpath, @alt )";
+
+            cmd.Parameters.AddWithValue("@catid", p.CategoryID);
+            cmd.Parameters.AddWithValue("@name", p.ProductName);
+            cmd.Parameters.AddWithValue("@desc", p.ProductDescription);
+            cmd.Parameters.AddWithValue("@path", p.ProductImgPath);
+            cmd.Parameters.AddWithValue("@thumbpath", p.ProductThumbPath);
+            cmd.Parameters.AddWithValue("@alt", p.ProductAltText);
+
+            try
+            {
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows == 1)
+                    return true;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return false;
+        }
+
         internal static bool DeleteMe(int userID)
         {
             SqlConnection con = getMeConnected();
@@ -524,6 +553,44 @@ VALUES(@name,@desc,@expdate,@date)";
                 con.Close();
             }
             return false;
+        }
+
+
+        
+        public static List<Announcement> getAllAnnouncements()
+        {
+            List<Announcement> announcements = new List<Announcement>();
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT [AnnouncmentID],[AnnouncmentName],[AnnouncmentDescription],[AnnouncmentExpireDate],[AnnouncmentDate]
+FROM [JustForYou].[dbo].[Announcements]
+where [AnnouncmentExpireDate] > CURRENT_TIMESTAMP and [AnnouncmentDate] > CURRENT_TIMESTAMP";
+
+            try
+            {
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Announcement an = new Announcement();
+                    an.AnnouncementID = Convert.ToInt32(rdr["AnnouncmentID"]);
+                    an.AnnouncementName = rdr["AnnouncmentName"].ToString();
+                    an.AnnouncementDescription = rdr["AnnouncmentDescription"].ToString();
+                    an.AnnouncementDate = Convert.ToDateTime(rdr["AnnouncmentDate"]);
+                    an.AnnouncementExpireDate = Convert.ToDateTime(rdr["AnnouncmentExpireDate"]);
+                    announcements.Add(an);
+                }
+            }
+            catch
+            {
+                return announcements;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return announcements;
         }
     }
 }
