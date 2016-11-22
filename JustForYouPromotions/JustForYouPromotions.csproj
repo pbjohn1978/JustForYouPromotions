@@ -153,6 +153,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminProductsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DeleteAnnouncementController.cs" />
     <Compile Include="Controllers\DeleteController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -246,6 +247,7 @@
     <Content Include="Views\AddAnnouncememtFromAdmin\Index.cshtml" />
     <Content Include="Views\AddAnnouncememtFromAdmin\IndexProb.cshtml" />
     <Content Include="Views\AddAnnouncememtFromAdmin\IndexProb2.cshtml" />
+    <Content Include="Views\DeleteAnnouncement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

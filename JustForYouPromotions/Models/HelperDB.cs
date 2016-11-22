@@ -18,6 +18,31 @@ namespace JustForYouPromotions.Models
             return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_home"].ConnectionString);
         }
 
+        internal static bool DeleteAnnouncement(int announcementID)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"DELETE FROM [dbo].[Announcements]
+WHERE [AnnouncmentID] = @id";
+
+            cmd.Parameters.AddWithValue("@id", announcementID);
+
+            try
+            {
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows > 0)
+                    return true;
+                else
+                    return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         internal static List<Announcement> GetMeAllTheAnnouncmentsPweez()
         {
             List<Announcement> AllAnounc = new List<Announcement>();

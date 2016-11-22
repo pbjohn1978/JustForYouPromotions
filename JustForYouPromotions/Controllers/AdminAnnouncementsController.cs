@@ -16,7 +16,7 @@ namespace JustForYouPromotions.Controllers
                 return RedirectToAction("Index", "Login");
 
             List<Announcement> allAnnounce = HelperDB.GetMeAllTheAnnouncmentsPweez();
-            ViewBag.prods = allAnnounce;
+            ViewBag.allAnn = allAnnounce;
 
             return View();
         }

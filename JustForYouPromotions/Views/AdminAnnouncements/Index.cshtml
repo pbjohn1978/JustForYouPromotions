@@ -18,7 +18,7 @@
         <th>Delete</th>
     </tr>
     @{
-        foreach (var item in ViewBag.prods)
+        foreach (var item in ViewBag.allAnn)
         {
             <tr>
                 <th>@item.AnnouncementID</th>
@@ -26,7 +26,7 @@
                 <th>@item.AnnouncementDescription</th>
                 <th>@item.GetExpireDate</th>
                 <th>@item.GetAnnounceDate</th>
-                <th>@Html.ActionLink("Delete", "Index", "DeleteAnnouncement", new { UserID = item.AnnouncementID }, null)</th>
+                <th>@Html.ActionLink("Delete", "Index", "DeleteAnnouncement", new { annID = item.AnnouncementID }, null)</th>
             </tr>
         }
 
