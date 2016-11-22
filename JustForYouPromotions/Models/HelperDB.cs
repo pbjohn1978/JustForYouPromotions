@@ -15,7 +15,44 @@ namespace JustForYouPromotions.Models
         /// <returns>SqlConnection</returns>
         public static SqlConnection getMeConnected()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_home"].ConnectionString);
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_school"].ConnectionString);
+        }
+
+        internal static List<Product> GetAllProductsNowBot()
+        {
+            List<Product> prods = new List<Product>();
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"SELECT [ProductID],[CategoryID],[ProductName],[ProductDescription],[ProductImgPath],[ProductThumbPath],[ProductAltText]
+FROM [JustForYou].[dbo].[Products]";
+
+            try
+            {
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Product p = new Product();
+                    p.ProductID = Convert.ToInt32(rdr["ProductID"]);
+                    p.CategoryID = Convert.ToInt32(rdr["CategoryID"]);
+                    p.ProductName = rdr["ProductName"].ToString();
+                    p.ProductDescription = rdr["ProductDescription"].ToString();
+                    p.ProductImgPath = rdr["ProductImgPath"].ToString();
+                    p.ProductThumbPath = rdr["ProductThumbPath"].ToString();
+                    p.ProductAltText = rdr["ProductAltText"].ToString();
+                    prods.Add(p);
+                }
+            }
+            catch
+            {
+                return prods;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return prods;
         }
 
         internal static bool DeleteAnnouncement(int announcementID)
@@ -565,7 +602,8 @@ VALUES(@name,@desc,@expdate,@date)";
             cmd.Connection = con;
             cmd.CommandText = @"SELECT [AnnouncmentID],[AnnouncmentName],[AnnouncmentDescription],[AnnouncmentExpireDate],[AnnouncmentDate]
 FROM [JustForYou].[dbo].[Announcements]
-where [AnnouncmentExpireDate] > CURRENT_TIMESTAMP and [AnnouncmentDate] > CURRENT_TIMESTAMP";
+where [AnnouncmentExpireDate] > CURRENT_TIMESTAMP and [AnnouncmentDate] > CURRENT_TIMESTAMP
+ORDER BY AnnouncmentDate ASC";
 
             try
             {

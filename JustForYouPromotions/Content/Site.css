@@ -247,3 +247,24 @@ span.tab {
     width:90%;
     height:150px;
 }
+
+.announcements {
+    padding:0px 20px 0px 0px;
+}
+
+.ProdTable {
+    padding:0px 20px 0px 0px;
+}
+
+.AnnounceTable {
+    padding:0px 20px 0px 0px;
+}
+
+.MemberTable {
+    padding:0px 20px 0px 0px;
+}
+
+.productThumb {
+    height:auto;
+    width:120px;
+}

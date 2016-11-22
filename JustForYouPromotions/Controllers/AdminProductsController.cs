@@ -14,6 +14,9 @@ namespace JustForYouPromotions.Controllers
         {
             if (!SessionHelper.IsAdminSession())
                 return RedirectToAction("Index", "Login");
+
+            ViewBag.prods = HelperDB.GetAllProductsNowBot();
+
             return View();
         }
     }

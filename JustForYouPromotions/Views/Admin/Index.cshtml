@@ -7,44 +7,46 @@
 
 <br /><br />
 <h2>Members</h2>
-<table class="adminTablePadding">
-    <tr>
-        <th>ID #</th>
-        <th>Update</th>
-        <th>UN:</th>
-        <th>First</th>
-        <th>Last</th>
-        <th>Email:</th>
-        <th>PASS:</th>
-        <th>Email Updates</th>
-        <th>Site Access</th>
-        <th style="color:red;">Delete</th>
-    </tr>
-    @{
-        foreach (var item in ViewBag.mems)
-        {
-            <tr>
-                <th>@item.UserID</th>
-                <th>@Html.ActionLink("Update", "Index", "UpdateUserFromAdmin", new { UserID = item.UserID }, null)</th>
-                <th>@item.UserAccessName</th>
-                <th>@item.UserFName</th>
-                <th>@item.UserLName</th>
-                <th>@item.UserEmail</th>
-                <th>@item.UserPassword</th>
-                <th>@item.UserEmailUpdates</th>
-                <th>@item.UserAccess</th>
-                @{
-                    if (JustForYouPromotions.Models.SessionHelper.GetMember().UserID != item.UserID)
-                    {
-                        <th>@Html.ActionLink("Delete User", "Index", "Delete", new { UserID = item.UserID }, null)</th>
+<div class="MemberTable">
+    <table class="adminTablePadding">
+        <tr>
+            <th>ID #</th>
+            <th>Update</th>
+            <th>UN:</th>
+            <th>First</th>
+            <th>Last</th>
+            <th>Email:</th>
+            <th>PASS:</th>
+            <th>Email Updates</th>
+            <th>Site Access</th>
+            <th style="color:red;">Delete</th>
+        </tr>
+        @{
+            foreach (var item in ViewBag.mems)
+            {
+                <tr>
+                    <th>@item.UserID</th>
+                    <th>@Html.ActionLink("Update", "Index", "UpdateUserFromAdmin", new { UserID = item.UserID }, null)</th>
+                    <th>@item.UserAccessName</th>
+                    <th>@item.UserFName</th>
+                    <th>@item.UserLName</th>
+                    <th>@item.UserEmail</th>
+                    <th>@item.UserPassword</th>
+                    <th>@item.UserEmailUpdates</th>
+                    <th>@item.UserAccess</th>
+                    @{
+                        if (JustForYouPromotions.Models.SessionHelper.GetMember().UserID != item.UserID)
+                        {
+                            <th>@Html.ActionLink("Delete User", "Index", "Delete", new { UserID = item.UserID }, null)</th>
+                        }
+                        else
+                        {
+                            <th></th>
+                        }
                     }
-                    else
-                    {
-                        <th></th>
-                    }
-                }
 
-            </tr>
+                </tr>
+                        }
         }
-    }
-</table>
+    </table>
+</div>

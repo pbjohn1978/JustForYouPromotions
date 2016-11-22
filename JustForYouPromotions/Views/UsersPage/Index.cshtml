@@ -15,7 +15,7 @@
         string email = (string)TempData["email"];
         string password = (string)TempData["pass"];
         @Html.DisplayName("User Name:")<br />
-        @Html.TextBoxFor(model => model.UserAccessName , new { placeholder = userName })
+        @userName
         <br /><br />
         @Html.DisplayName("First Name:")<br />
         @Html.TextBoxFor(model => model.UserFirstName, new { placeholder = firstName })

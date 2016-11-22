@@ -7,7 +7,32 @@
 <span>@Html.ActionLink("Members", "Index", "Admin")  |  @Html.ActionLink("Products", "Index", "AdminProducts")  |  @Html.ActionLink("Announcements", "Index", "AdminAnnouncements")</span>
 
 <br /><br />
-<h2>Products</h2>
+<h2>Products</h2><br />
 @Html.ActionLink("Add New Product", "Index", "AddProductFromAdmin")<br /><br />
 
-<br /><br /><h2>this is where the products table will go... beeker do this... eventually...</h2>
+<div class="ProdTable">
+    <table class="adminTablePadding">
+        <tr>
+            <th>ID:</th>
+            <th>Name:</th>
+            <th>Desc:</th>
+            <th>Prod IMG:</th>
+            <th>Prod ALT Text:</th>
+            <th>Delete</th>
+        </tr>
+        @{
+            foreach (var item in ViewBag.prods)
+            {
+                <tr>
+                    <th>@item.ProductID</th>
+                    <th>@item.ProductName</th>
+                    <th>@item.ProductDescription</th>
+                    <th><img class="productThumb" src="~/Images/@item.ProductImgPath" /></th>
+                    <th>@item.ProductAltText</th>
+                    <th>@Html.ActionLink("Delete", "Index", "DeleteAnnouncement", new { annID = item.ProductID }, null)</th>
+                </tr>
+            }
+
+        }
+    </table>
+</div>

@@ -48,16 +48,18 @@
                             }
                         }
                     }
-                    <h3>Announcements:</h3>
-                    <br />
-                    @{ List < JustForYouPromotions.Models.Announcement> anns = JustForYouPromotions.Models.HelperDB.getAllAnnouncements();
-                        foreach (JustForYouPromotions.Models.Announcement a in anns)
-                        {
-                            <h2>@a.AnnouncementName</h2>
-                            <h3>@a.GetAnnounceDate</h3>
-                            <p>@a.AnnouncementDescription</p>
+                    <div class="announcements">
+                        <h3>Announcements:</h3>
+                        <br />
+                        @{ List<JustForYouPromotions.Models.Announcement> anns = JustForYouPromotions.Models.HelperDB.getAllAnnouncements();
+                            foreach (JustForYouPromotions.Models.Announcement a in anns)
+                            {
+                                <h2>@a.AnnouncementName</h2>
+                                <h3>@a.GetAnnounceDate</h3>
+                                <p>@a.AnnouncementDescription</p>
+                            }
                         }
-                    }
+                    </div>
 
 
                     </div>
