@@ -42,12 +42,12 @@ namespace JustForYouPromotions.Controllers
                 if (sm.UserAccess == 0)
                     sm.UserAccess = tempUserData.UserAccess;
                 sm.UserEmailUpdates = tempUserData.UserEmailUpdates;
-
+                HelperDB.DeleteMe(sm.UserID);
                 int validationResult = ValidatorClass.IsValidUserUpdateFromAdmin(sm);
-
+                
                 if (validationResult == 0)
                 {
-                    if (!HelperDB.UpdateUserInDB(sm))
+                    if (!HelperDB.AddNewUser(sm))
                         return RedirectToAction("IndexErrorDB", "Error");
                     return RedirectToAction("Index", "Success");
                 }

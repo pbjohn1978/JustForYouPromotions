@@ -1,7 +1,26 @@
-﻿
+﻿@model JustForYouPromotions.Models.ContactForm
 @{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contact Form";
 }
 
-
-<h3>this is where the content for the contact page goes :)</h3>
+<br /><br />
+<h3>Just For You Promotions Contact Form:</h3>
+<br /><br /><br />
+<div>
+    @using(Html.BeginForm())
+    {
+        @Html.DisplayName("Your Name:")<br />
+        @Html.TextBoxFor(model => model.Name )
+        <br /><br />
+        @Html.DisplayName("Email Address:")<br />
+        @Html.TextBoxFor(model => model.FromEmailAddress )
+        <br /><br />
+        @Html.DisplayName("Subject:")<br />
+        @Html.TextBoxFor(model => model.EmailSubject )
+        <br /><br />
+        @Html.DisplayName("Message:")<br />
+        @Html.TextAreaFor(model => model.EmailBody )
+        <br /><br />
+        <input type="submit" value="Send" />
+    }
+</div>

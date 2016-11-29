@@ -50,7 +50,8 @@ namespace JustForYouPromotions.Controllers
                 if (nuser.ConfirmPassword == null)
                     nuser.ConfirmPassword = mem.UserPassword;
 
-                int validationResult = ValidatorClass.IsValidUserUpdating(nuser);
+                HelperDB.DeleteMe(mem.UserID);
+                int validationResult = ValidatorClass.IsValidUser(nuser);
                 if (validationResult == 0)
                 {
                     SiteMember sm = new Models.SiteMember();
@@ -62,23 +63,29 @@ namespace JustForYouPromotions.Controllers
                     sm.UserEmailUpdates = nuser.UserEmailUpdates;
                     sm.UserPassword = nuser.Password;
                     sm.UserID = mem.UserID;
-                    if (!HelperDB.UpdateUserInDB(sm))
+                    if (!HelperDB.AddNewUser(sm))
+                    {
+                        HelperDB.AddNewUser(mem);
                         return RedirectToAction("IndexErrorDB", "Error");
-
+                    }
                     return RedirectToAction("Index", "Success");
                 }
                 else if (validationResult == 2)
                 {
+                    HelperDB.AddNewUser(mem);
                     return RedirectToAction("PasswordsDontMatch", "Error");
                 }
                 else if (validationResult == 1)
                 {
+                    HelperDB.AddNewUser(mem);
                     return RedirectToAction("UserNameTaken", "Error");
                 }
                 else if (validationResult == 3)
                 {
+                    HelperDB.AddNewUser(mem);
                     return RedirectToAction("EmailTaken", "Error");
                 }
+                HelperDB.AddNewUser(mem);
                 return RedirectToAction("IndexCatchAll", "Error");
             }
             catch
