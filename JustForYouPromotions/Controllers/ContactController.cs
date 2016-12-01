@@ -41,7 +41,7 @@ namespace JustForYouPromotions.Controllers
             myMessage.Html = $"<p>Customer Name: {cm.Name}</p><p>Subject: {cm.EmailSubject}</p><p>Customer Email: {cm.FromEmailAddress}</p><p>Customer Message: {cm.EmailBody}</p>";
             myMessage.Text = "Hello World plain text!";
 
-            var apiKey = "";
+            var apiKey = ConfigurationManager.ConnectionStrings["apiKey"].ToString();
             // create a Web transport, using API Key
             var transportWeb = new Web(apiKey);
 
