@@ -171,11 +171,13 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DeleteAnnouncementController.cs" />
     <Compile Include="Controllers\DeleteController.cs" />
+    <Compile Include="Controllers\DeleteProductController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvalidCredsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogOutController.cs" />
+    <Compile Include="Controllers\ProductPageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SuccessController.cs" />
@@ -270,6 +272,8 @@
     <Content Include="Views\AddProductFromAdmin\Index.cshtml" />
     <Content Include="Views\AddProductFromAdmin\IndexPost.cshtml" />
     <Content Include="Views\Contact\IndexPost.cshtml" />
+    <Content Include="Views\DeleteProduct\Index.cshtml" />
+    <Content Include="Views\ProductPage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

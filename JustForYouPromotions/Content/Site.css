@@ -268,3 +268,7 @@ span.tab {
     height:auto;
     width:120px;
 }
+
+.ProductPagePadding th {
+    padding:10px 15px 10px 15px;
+}

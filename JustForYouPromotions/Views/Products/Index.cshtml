@@ -3,17 +3,16 @@
     ViewBag.Title = "Products";
 }
 
-
 <h3>Products:</h3><br /><br />
 <div class="ProdTable">
-    <table class="adminTablePadding">
+    <table class="ProductPagePadding">
         @{
             foreach (var item in ViewBag.prods)
             {
-                <tr>    
-                    <th><img class="productThumb" src="~/Images/@item.ProductImgPath" alt="@item.ProductAltText" /></th>
+                <tr >
+                    <th ><img class="productThumb" src="~/Images/@item.ProductImgPath" alt="@item.ProductAltText" /></th>
+                    <th>@Html.ActionLink("View Product", "Index", "ProductPage", new { pdID = item.ProductID }, null)</th>
                     <th>@item.ProductName</th>
-                    <th>@item.ProductDescription</th>
                 </tr>
             }
         }
