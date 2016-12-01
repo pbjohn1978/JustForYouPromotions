@@ -80,6 +80,32 @@ WHERE [AnnouncmentID] = @id";
             }
         }
 
+        internal static bool DeleteProduct(int productID)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"DELETE FROM [dbo].[Products]
+WHERE [ProductID] = @id";
+
+            cmd.Parameters.AddWithValue("@id", productID);
+
+            try
+            {
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows > 0)
+                    return true;
+                else
+                    return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
         internal static List<Announcement> GetMeAllTheAnnouncmentsPweez()
         {
             List<Announcement> AllAnounc = new List<Announcement>();
