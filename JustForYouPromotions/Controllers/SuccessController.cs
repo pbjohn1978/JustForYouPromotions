@@ -11,8 +11,6 @@ namespace JustForYouPromotions.Controllers
         // GET: Success
         public ActionResult Index()
         {
-            if (!Models.SessionHelper.IsMemberLoggedIn())
-                return RedirectToAction("Index", "Login");
             return View();
         }
     }
