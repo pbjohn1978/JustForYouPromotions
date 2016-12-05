@@ -1,6 +1,7 @@
 ﻿body {
     margin:0px;
     padding:0px 0px 0px 0px;
+    font-family:'Times New Roman', Times, serif;
 }
 
 h1 {
@@ -76,7 +77,8 @@ h6 {
 }
 
 .HeaderWordsCont {
-    padding:20px 0px 20px 0px;
+    color:#0018d7;
+    padding:40px 0px 20px 0px;
     float:right;
     width:75%;
     height:25%;
@@ -171,7 +173,7 @@ h6 {
 .sideBar{
 	float:left;
 	width:29%;
-	color:#1AFF00;
+    color:#ffffff;
 }
 
 .sideBar div{

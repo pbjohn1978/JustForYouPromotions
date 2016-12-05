@@ -29,7 +29,7 @@
         @Html.TextBoxFor(model => model.UserAccess, new { placeholder = ViewBag.mem.UserAccess })
         <br /><br />
         @Html.DisplayName("Password:")<br />
-        @Html.TextBoxFor(model => model.UserPassword )
+        @Html.TextBoxFor(model => model.UserPassword , new { placeholder = "BlankForPresentaions" })
         <br /><br />
         <input type="submit" value="SUBMIT" />
     }
