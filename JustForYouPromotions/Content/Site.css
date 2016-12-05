@@ -48,7 +48,7 @@ h6 {
 
 .wrap{
 	max-width:2000px;
-	min-width:1360px;
+	min-width:1000px;
 }
 
 .banner{
@@ -273,4 +273,14 @@ span.tab {
 
 .ProductPagePadding th {
     padding:10px 15px 10px 15px;
+}
+
+.ImgIndividualProdPage {
+    height:auto;
+    width:400px;
+}
+
+.IndividualProdPageContainer {
+    height:auto;
+    width:700px;
 }

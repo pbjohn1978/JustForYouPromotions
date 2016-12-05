@@ -3,7 +3,11 @@
     ViewBag.Title = "Index";
 }
 
-<h1>@ViewBag.prod.ProductName</h1><br />
-<img class="productThumb" src="~/Images/@ViewBag.prod.ProductImgPath" alt="@ViewBag.prod.ProductAltText" /><br /><br />
-<p>@ViewBag.prod.ProductDescription</p>
-
+<div class="IndividualProdPageContainer">
+    <h1>@ViewBag.prod.ProductName</h1>
+    <br />
+    <img class="ImgIndividualProdPage" src="~/Images/@ViewBag.prod.ProductImgPath" alt="@ViewBag.prod.ProductAltText" />
+    <br />
+    <br />
+    <p>@ViewBag.prod.ProductDescription</p>
+</div>

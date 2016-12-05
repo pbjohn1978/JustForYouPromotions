@@ -221,7 +221,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\JFYP - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\JFYP - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\JFYP - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\JFYP - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\JFYP.pubxml" />
     <None Include="Properties\PublishProfiles\justforyoupromotions.pubxml" />
