@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<br /><br />
 <div>
     @using (Html.BeginForm())
     {
@@ -17,6 +17,8 @@
         <br /><br />
         @Html.DisplayName("Announcement Date (format mm-dd-yyyy):")<br />
         @Html.TextBoxFor(model => model.AnnouncementDate)
+        <br /><br />
         <input type="submit" value="Add Me!" />
     }
 </div>
+<br /><br /><br /><br />

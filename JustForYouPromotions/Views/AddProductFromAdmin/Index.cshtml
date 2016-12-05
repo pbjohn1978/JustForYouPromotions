@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<br /><br />
 @using (Html.BeginForm("Index", "AddProductFromAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 @Html.DisplayName("Product Name:")<br />
@@ -13,8 +13,9 @@
 <br /><br />
 @Html.DisplayName("Alternate Text (This is required)")<br />
 @Html.TextBoxFor(model => model.AltText)
-<br />
+<br /><br />
 <input type="file" name="prodPhoto" />
-<br />
+<br /><br /><br />
 <input type="submit" value="Add Me!" />
 }
+<br /><br /><br /><br />
