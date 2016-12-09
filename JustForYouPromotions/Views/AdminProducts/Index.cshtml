@@ -27,7 +27,7 @@
                     <th>@item.ProductID</th>
                     <th>@item.ProductName</th>
                     <th>@item.ProductDescription</th>
-                    <th><img class="productThumb" src="~/Images/@item.ProductImgPath" /></th>
+                    <th><img class="productThumb" src="~/Images/@item.ProductImgPath" alt="@item.ProductAltText"/></th>
                     <th>@item.ProductAltText</th>
                     <th>@Html.ActionLink("Delete", "Index", "DeleteProduct", new { pdID = item.ProductID }, null)</th>
                 </tr>
