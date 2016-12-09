@@ -31,19 +31,19 @@
                     @{
                         if (!JustForYouPromotions.Models.SessionHelper.IsMemberLoggedIn())
                         {
-                            <h3>@Html.ActionLink("Click Me", "Index", "Login") to Sign In.</h3>
+                            <h3>@Html.ActionLink("Click Me", "Index", "Login", null, new { @class ="sideBarLinkColor"  } ) to Sign In.</h3>
                             <br />
-                            <span>@Html.ActionLink("Click Me", "Index", "Register")</span><span>  to register for email updates about new products!</span>
+                            <span>@Html.ActionLink("Click Me", "Index", "Register", null, new { @class = "sideBarLinkColor" })</span><span>  to register for email updates about new products!</span>
                             <br /><br /><br />
                         }
                         else
                         {
-                            <h3>@Html.ActionLink("Log Out", "Index", "LogOut")</h3><br />
-                            <h3>@Html.ActionLink("Update Your User Info", "Index", "UsersPage")</h3><br />
+                            <h3>@Html.ActionLink("Log Out", "Index", "LogOut", null, new { @class = "sideBarLinkColor" })</h3><br />
+                            <h3>@Html.ActionLink("Update Your User Info", "Index", "UsersPage", null, new { @class = "sideBarLinkColor" })</h3><br />
                             if (JustForYouPromotions.Models.SessionHelper.IsAdminSession())
                             {
-                                <h3>@Html.ActionLink("Admin Page", "Index", "Admin")</h3><br />
-                                <h3>@Html.ActionLink("Register a new user", "Index", "Register")</h3>
+                                <h3>@Html.ActionLink("Admin Page", "Index", "Admin", null, new { @class = "sideBarLinkColor" })</h3><br />
+                                <h3>@Html.ActionLink("Register a new user", "Index", "Register", null, new { @class = "sideBarLinkColor" })</h3>
                                 <br /><br />
                             }
                         }

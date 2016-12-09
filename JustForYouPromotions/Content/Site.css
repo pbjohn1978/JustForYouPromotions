@@ -299,3 +299,19 @@ span.tab {
     height:auto;
     width:700px;
 }
+
+a.sideBarLinkColor {
+    color:#fafc06;
+}
+
+a.sideBarLinkColor:visited {
+    color:#fafc06;
+}
+
+a.sideBarLinkColor:active {
+    color:#fafc06;
+}
+
+a.sideBarLinkColor:link {
+    color:#fafc06;
+}
