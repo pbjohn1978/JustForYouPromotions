@@ -53,7 +53,7 @@
                     <th>@item.UserEmailUpdates</th>
                     <th>@item.UserAccess</th>
                     @{
-                        if (JustForYouPromotions.Models.SessionHelper.GetMember().UserID != item.UserID)
+                        if (item.UserAccess < 3 && JustForYouPromotions.Models.SessionHelper.GetMember().UserID != item.UserID)
                         {
                             <th>@Html.ActionLink("Delete User", "Index", "Delete", new { UserID = item.UserID }, null)</th>
                         }
