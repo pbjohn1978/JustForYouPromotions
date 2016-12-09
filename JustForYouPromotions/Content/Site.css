@@ -284,10 +284,15 @@ span.tab {
 .productThumb {
     height:auto;
     width:120px;
+    padding:20px 0px 20px 0px;
 }
 
 .ProductPagePadding th {
     padding:10px 15px 10px 15px;
+}
+
+.ProductPagePadding tr {
+    border:groove;
 }
 
 .ImgIndividualProdPage {
