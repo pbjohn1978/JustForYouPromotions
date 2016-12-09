@@ -49,13 +49,14 @@ namespace JustForYouPromotions.Controllers
                     nuser.Password = mem.UserPassword;
                 if (nuser.ConfirmPassword == null)
                     nuser.ConfirmPassword = mem.UserPassword;
-
-                HelperDB.DeleteMe(mem.UserID);
+                
+                HelperDB.DeleteEmailAndUserNameForValidation(mem.UserID);
+                
                 int validationResult = ValidatorClass.IsValidUser(nuser);
                 if (validationResult == 0)
                 {
                     SiteMember sm = new Models.SiteMember();
-                    sm.UserAccess = 1;
+                    sm.UserAccess = mem.UserAccess;
                     sm.UserAccessName = nuser.UserAccessName;
                     sm.UserFName = nuser.UserFirstName;
                     sm.UserLName = nuser.UserLastName;
@@ -63,29 +64,29 @@ namespace JustForYouPromotions.Controllers
                     sm.UserEmailUpdates = nuser.UserEmailUpdates;
                     sm.UserPassword = nuser.Password;
                     sm.UserID = mem.UserID;
-                    if (!HelperDB.AddNewUser(sm))
+                    if (!HelperDB.UpdateUserInDB(sm))
                     {
-                        HelperDB.AddNewUser(mem);
+                        HelperDB.UpdateUserInDB(mem);
                         return RedirectToAction("IndexErrorDB", "Error");
                     }
                     return RedirectToAction("Index", "Success");
                 }
                 else if (validationResult == 2)
                 {
-                    HelperDB.AddNewUser(mem);
+                    HelperDB.UpdateUserInDB(mem);
                     return RedirectToAction("PasswordsDontMatch", "Error");
                 }
                 else if (validationResult == 1)
                 {
-                    HelperDB.AddNewUser(mem);
+                    HelperDB.UpdateUserInDB(mem);
                     return RedirectToAction("UserNameTaken", "Error");
                 }
                 else if (validationResult == 3)
                 {
-                    HelperDB.AddNewUser(mem);
+                    HelperDB.UpdateUserInDB(mem);
                     return RedirectToAction("EmailTaken", "Error");
                 }
-                HelperDB.AddNewUser(mem);
+                HelperDB.UpdateUserInDB(mem);
                 return RedirectToAction("IndexCatchAll", "Error");
             }
             catch

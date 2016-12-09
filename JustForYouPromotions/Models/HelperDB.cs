@@ -8,14 +8,14 @@ using System.Web;
 namespace JustForYouPromotions.Models
 {
     public class HelperDB
-    {   
+    {
         /// <summary>
         /// this is da SqlConnection... and stuff... 
         /// </summary>
         /// <returns>SqlConnection</returns>
         public static SqlConnection getMeConnected()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_school"].ConnectionString);
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["jfy_home"].ConnectionString);
         }
 
         internal static List<Product> GetAllProductsNowBot()
@@ -269,34 +269,7 @@ WHERE [UserID] = @user";
             }
             return false;
         }
-
-
-        private static bool IsUserInDBYet(SiteMember sm)
-        {
-            SqlConnection con = getMeConnected();
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            cmd.CommandText = @"SELECT[UserAccessName]
-FROM[JustForYou].[dbo].[Users]
-where[UserAccessName] = @un";
-
-            cmd.Parameters.AddWithValue("@un", sm.UserAccessName);
-
-            try
-            {
-                con.Open();
-                SqlDataReader rdr = cmd.ExecuteReader();
-                if (rdr.HasRows)
-                    return true;
-                else
-                    return false;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-
+        
 
         /// <summary>
         /// takes in a RegisterViewModel object and will return and INT representing the number of rows in the database with a matching UserAccessName
@@ -480,7 +453,7 @@ where [UserAccessName] = @un and [UserPassword] = @ps";
                 SqlDataReader rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
-                    
+
                     sm.UserFName = rdr["UserFName"].ToString();
                     sm.UserLName = rdr["UserLName"].ToString();
                     sm.UserEmail = rdr["UserEmail"].ToString();
@@ -557,7 +530,7 @@ where [UserID] = @id";
             cmd.Connection = con;
             cmd.CommandText = @"SELECT [UserID],[UserFName],[UserLName],[UserEmail],[UserPassword],[UserEmailUpdates],[UserAccess],[UserAccessName]
 FROM [dbo].[Users]";
-            
+
             try
             {
                 con.Open();
@@ -619,7 +592,7 @@ VALUES(@name,@desc,@expdate,@date)";
         }
 
 
-        
+
         public static List<Announcement> getAllAnnouncements()
         {
             List<Announcement> announcements = new List<Announcement>();
@@ -656,5 +629,34 @@ ORDER BY AnnouncmentDate ASC";
             }
             return announcements;
         }
+
+
+        internal static bool DeleteEmailAndUserNameForValidation(int userID)
+        {
+            SqlConnection con = getMeConnected();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = @"UPDATE [dbo].[Users]
+   SET [UserAccessName] = ''
+      ,[UserEmail] = ''
+ WHERE [UserID] = @id";
+
+            cmd.Parameters.AddWithValue("@id", userID);
+
+            try
+            {
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows > 0)
+                    return true;
+                else
+                    return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
     }
 }

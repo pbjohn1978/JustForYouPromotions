@@ -9,13 +9,14 @@
 <div>
     @using (Html.BeginForm())
     {
-        string userName = (string)TempData["username"];
-        string firstName = (string)TempData["first"];
-        string lastName = (string)TempData["last"];
-        string email = (string)TempData["email"];
-        string password = (string)TempData["pass"];
+        JustForYouPromotions.Models.SiteMember sm = JustForYouPromotions.Models.SessionHelper.GetMember();
+        string userName = sm.UserAccessName;
+        string firstName = sm.UserFName;
+        string lastName = sm.UserLName;
+        string email = sm.UserEmail;
+        string password = sm.UserPassword;
         @Html.DisplayName("User Name:")<br />
-        @userName
+        @Html.TextBoxFor(model => model.UserAccessName, new { placeholder = userName })
         <br /><br />
         @Html.DisplayName("First Name:")<br />
         @Html.TextBoxFor(model => model.UserFirstName, new { placeholder = firstName })

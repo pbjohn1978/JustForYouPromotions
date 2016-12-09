@@ -26,12 +26,30 @@
             {
                 <tr>
                     <th>@item.UserID</th>
-                    <th>@Html.ActionLink("Update", "Index", "UpdateUserFromAdmin", new { UserID = item.UserID }, null)</th>
+                    @{
+                        if (item.UserAccess < 2 && JustForYouPromotions.Models.SessionHelper.GetMember().UserID != item.UserID || item.UserAccess < 3 && JustForYouPromotions.Models.SessionHelper.IsSuperAdminSession())
+                        {
+                            <th>@Html.ActionLink("Update", "Index", "UpdateUserFromAdmin", new { UserID = item.UserID }, null)</th>
+                        }
+                        else
+                        {
+                            <th></th>
+                        }
+                    }
                     <th>@item.UserAccessName</th>
                     <th>@item.UserFName</th>
                     <th>@item.UserLName</th>
                     <th>@item.UserEmail</th>
-                    <th>_</th>
+                    @{
+                        if (item.UserAccess < 2 || JustForYouPromotions.Models.SessionHelper.IsSuperAdminSession())
+                        {
+                            <th>@item.UserPassword</th>
+                        }
+                        else
+                        {
+                            <th>_</th>
+                        }
+                    }
                     <th>@item.UserEmailUpdates</th>
                     <th>@item.UserAccess</th>
                     @{

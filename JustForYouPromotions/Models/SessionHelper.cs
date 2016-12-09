@@ -32,5 +32,17 @@ namespace JustForYouPromotions.Models
             }
             return false;
         }
+
+        public static bool IsSuperAdminSession()
+        {
+            if (HttpContext.Current.Session["memid"] != null)
+            {
+                int memID = Convert.ToInt32(HttpContext.Current.Session["memid"]);
+                SiteMember mem = HelperDB.getMember(memID);
+                if (mem.UserAccess > 2)
+                    return true;
+            }
+            return false;
+        }
     }
 }
