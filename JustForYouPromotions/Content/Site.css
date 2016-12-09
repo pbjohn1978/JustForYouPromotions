@@ -5,31 +5,37 @@
 }
 
 h1 {
+    font-size:xx-large;
     margin:0px;
     padding:0px 0px 0px 0px;
 }
 
-h2 {
+h2 {    
+    font-size:x-large;
     margin:0px;
     padding:0px 0px 0px 0px;
 }
 
 h3 {
+    font-size:large;
     margin:0px;
     padding:0px 0px 0px 0px;
 }
 
-h4 {
+h4 {    
+    font-size:medium;
     margin:0px;
     padding:0px 0px 0px 0px;
 }
 
-h5 {
+h5 {    
+    font-size:small;
     margin:0px;
     padding:0px 0px 0px 0px;
 }
 
 h6 {
+    font-size:smaller;
     margin:0px;
     padding:0px 0px 0px 0px;
 }
@@ -48,7 +54,7 @@ h6 {
 
 .wrap{
 	max-width:2000px;
-	min-width:1000px;
+	min-width:700px;
 }
 
 .banner{
@@ -77,10 +83,12 @@ h6 {
 }
 
 .HeaderWordsCont {
-    color:#0018d7;
-    padding:40px 0px 20px 0px;
+    color:#ffffff;
+    margin-top:20px;
+    margin-right:2%;
+    text-align:right;
     float:right;
-    width:75%;
+    width:73%;
     height:25%;
 }
 
@@ -242,6 +250,7 @@ span.tab {
 
 .adminTablePadding th {
     border:groove;
+    font-size:x-small;
     padding:10px 15px 10px 15px;
 }
 
@@ -254,11 +263,17 @@ span.tab {
     padding:0px 20px 0px 0px;
 }
 
+.announcements h3 {
+    font-size:large;
+}
+
 .ProdTable {
+    font-size:medium;
     padding:0px 20px 0px 0px;
 }
 
 .AnnounceTable {
+    font-size:large;
     padding:0px 20px 0px 0px;
 }
 
